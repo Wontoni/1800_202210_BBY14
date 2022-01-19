@@ -7,6 +7,7 @@
 ## General Info
 This browser based web application to ...
 * Hi my name is Winston, I'm excited about this project because I am not.
+* Hi my name is Alan, I'm excited about this project because yes.
 	
 ## Technologies
 Technologies used for this project:
