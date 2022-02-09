@@ -6,12 +6,9 @@
 
 ## General Info
 This browser based web application to ...
-<<<<<<< HEAD
 * Hi my name is Winston, I'm excited about this project because I am not.
 * Hi my name is Alan, I'm excited about this project because yes.
-=======
 * Hi my name is Usman. I'm excited about this project because I will be able to use the app in my own day to day life.
->>>>>>> c438333 (Added one line intro to Readme file for BBY14)
 	
 ## Technologies
 Technologies used for this project:
