@@ -29,12 +29,15 @@ body {
 #calheader {
     width: 100%;
     height: 75px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: auto;
     text-align: center;
-    background-color: turquoise;
+}
+
+#calheader i:hover {
+    color: gray;
+    cursor: pointer;
 }
 
 #monthyear {
@@ -42,7 +45,13 @@ body {
 }
 
 #current {
+    width: auto;
     font-size: 17.5px;
+}
+
+#current:hover {
+    color: gray;
+    cursor: pointer;
 }
 
 #weekdays {
@@ -68,11 +77,16 @@ body {
 
 #days div {
     font-size: 18px;
-    border: 1px solid gray;
+    border: 1px solid black;
 }
 
 #days span {
     margin-left: 5%;
+}
+
+.othermonth {
+    background-color: lightgray;
+    color: gray;
 }
 
 @media only screen and (min-width: 851px) {
