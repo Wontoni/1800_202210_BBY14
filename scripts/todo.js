@@ -1,3 +1,11 @@
+// Open/Close To-Do List
+var myOffcanvas = document.getElementById('offcanvasWithBackdrop')
+var bsOffcanvas = new bootstrap.Offcanvas(offcanvasWithBackdrop)
+
+function toggleToDo(){
+  bsOffcanvas.toggle();
+}
+
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -32,11 +40,6 @@ function newElement() {
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
   var t = document.createTextNode(inputValue);
-  var list = db.collcetion("To-Do");
-  db.collection("users").doc(user.uid).collection("to-do"){
-      name: inputValue,
-      complete: false
-  }
   li.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");

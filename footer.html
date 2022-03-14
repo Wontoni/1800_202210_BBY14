@@ -1,8 +1,37 @@
 <!-- Google Icons (Material Design)-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!-- Stylesheet for To-Do List-->
+<link rel="stylesheet" href="./styles/todo.css">
+
 <footer class="navbar justify-content-evenly bg-info" style=height:70px;>
     <i class="material-icons md-48">calendar_today</i>
-    <i class="material-icons md-48" onclick="">check_box</i>
-    <i class="material-icons md-48">share</i>
+
+
+    <i class="material-icons md-48" onclick="toggleToDo()">check_box</i>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+        <div class="offcanvas-header bg-info">
+          <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">To-Do List</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                <div id="myDIV" class="header p-3 mb-2 bg-info">
+                    <input type="text" id="myInput" placeholder="Title...">
+                    <span onclick="newElement()" class="addBtn">Add</span>
+                </div>
+
+                <!-- List of tasks user sees -->
+                <ul id="myUL">
+                </ul>
+            </div>
+        </div>
+      </div>
+
+      <i class="material-icons md-48">share</i>
+
+      <!-- Javascripts-->
+      <script src="./scripts/todo.js"></script>
 </footer>
+
