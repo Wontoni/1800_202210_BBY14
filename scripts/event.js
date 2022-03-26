@@ -1,7 +1,7 @@
 function writeEvent() {
     let Event = document.getElementById("eventTitle").value;
-    let Time = document.getElementById("dateAndTime").value;
-    let Duration = document.getElementById("lengthOfEvent").value;
+    let Time = document.getElementById("date").value;
+    let Duration = document.getElementById("time").value;
     let Location = document.getElementById("location").value;
 
 
@@ -17,8 +17,8 @@ function writeEvent() {
                         code: eventID,
                         userID: userID,  //for logged in user
                         eventTitle: Event,
-                        dateAndTime: Time,
-                        lengthOfEvent: Duration,
+                        time: Time,
+                        date: Date,
                         location: Location,
                     })
                     .then(function(){

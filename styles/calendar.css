@@ -89,22 +89,14 @@ body {
     color: gray;
 }
 
-.fixed-btn {
+.addevent {
     position: fixed;
     background: #0FACF3;
-    width: 60px;
-    height: 60px;
-    line-height: 45px;
-    bottom: 13%;
-    right: 4%;
-    border-radius: 60px;
-    text-align: center;
+    line-height: 60px;
+    bottom: 12%;
+    right: 2%;
+    text-align: justify;
     cursor: pointer;
-}
-
-.fixed-btn>p {
-    font-size: 3em;
-    border-radius: 60px;
 }
 
 @media only screen and (min-width: 851px) {
