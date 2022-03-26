@@ -113,3 +113,8 @@
 .addBtn:hover {
   background-color: #bbb;
 }
+
+/* Makes cursor pointer */
+.material-icons{
+  cursor: pointer;
+}
