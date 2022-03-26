@@ -15,6 +15,8 @@ function loadCalendar() {
     document.querySelector("#weekday").innerHTML = date.toLocaleString('default', {
         weekday: 'long'
     });
+    
+    
 
     let today = date.getDate();
     let todayday = date.getDay();
