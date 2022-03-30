@@ -7,33 +7,30 @@
 <footer class="navbar justify-content-evenly bg-info" style=height:70px;>
     <i class="material-icons md-48" href="calendar.html?view=month">calendar_today</i>
 
-    
+
     <i class="material-icons md-48" onclick="toggleToDo()">check_box</i>
-    
-    <div class="list-container">
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="todoOffCanvas" aria-labelledby="todoOffCanvasLabel">
-            <div class="offcanvas-header bg-info">
-              <h5 class="offcanvas-title" id="todoOffCanvasLabel">To-Do List</h5>
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body todo-list">
-                <div>
-                    <div id="ToDo" class="todoHeader p-3 mb-2 bg-info">
-                        <input type="text" id="newToDo" class="inputBtn" placeholder="Title...">
-                        <span onclick="newElement()" class="addBtn">Add</span>
-                    </div>
-    
-                    <!-- List of tasks user sees -->
-                    <ul id="todoList">
-                    </ul>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="todoOffCanvas" aria-labelledby="todoOffCanvasLabel">
+        <div class="offcanvas-header bg-info">
+            <h5 class="offcanvas-title" id="todoOffCanvasLabel">To-Do List</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body todo-list">
+            <div>
+                <div id="ToDo" class="todoHeader p-3 mb-2 bg-info">
+                    <input type="text" id="newToDo" class="inputBtn" placeholder="Title...">
+                    <span onclick="newElement()" class="addBtn">Add</span>
                 </div>
+
+                <!-- List of tasks user sees -->
+                <ul id="todoList">
+                </ul>
             </div>
-          </div>
+        </div>
     </div>
 
-      <i class="material-icons md-48">share</i>
+    <i class="material-icons md-48">share</i>
 
-      <!-- Javascripts-->
-      <script src="./scripts/todo.js"></script>
+    <!-- Javascripts-->
+    <script src="./scripts/todo.js"></script>
 </footer>
-

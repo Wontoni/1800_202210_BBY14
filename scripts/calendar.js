@@ -23,7 +23,6 @@ function loadDefaultView(){
             currentUser.get()
                 .then(userDoc => {
                     var userDefault = userDoc.data().default;
-
                     if (userDefault == "Month") {
                         loadMonthView();
                     } else if (userDefault == "Week") {
@@ -42,7 +41,6 @@ function loadView() {
     // create a URL object
     let params = new URL(window.location.href);
     let view = params.searchParams.get("view");
-
     if (view == "month") {
         loadMonthView();
     } else if (view == "week") {
@@ -52,6 +50,5 @@ function loadView() {
     } else {
         loadDefaultView();
     }
-
 }
 loadView();
