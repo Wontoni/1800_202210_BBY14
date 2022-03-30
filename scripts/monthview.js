@@ -12,8 +12,6 @@ function loadCalendar() {
         year: 'numeric'
     });
 
-    let days = "";
-
     let monthdays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     let day = 1;
     let prevmonthdays = new Date(date.getFullYear(), date.getMonth(), 1).getDay();

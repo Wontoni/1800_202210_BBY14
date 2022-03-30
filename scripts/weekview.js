@@ -12,17 +12,12 @@ function loadCalendar() {
         year: 'numeric'
     });
 
-    let days = "";
-
     let prevmonthdays = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
     let prevmonthday = new Date(date.getFullYear(), date.getMonth(), 0).getDate() - prevmonthdays + 1;
     let monthdays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     let today = date.getDate();
     let todayday = date.getDay();
-    console.log(today);
-    console.log(todayday);
     let day = today - todayday;
-    console.log(day);
     let nextmonthdays = 7 - new Date(date.getFullYear(), date.getMonth() + 1, 1).getDay();
     let nextmonthday = 1;
 
