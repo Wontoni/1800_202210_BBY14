@@ -118,12 +118,8 @@ body {
 
 .addevent {
     position: fixed;
-    background: #0FACF3;
-    line-height: 60px;
     bottom: 12%;
     right: 2%;
-    text-align: justify;
-    cursor: pointer;
 }
 
 @media only screen and (min-width: 851px) {
