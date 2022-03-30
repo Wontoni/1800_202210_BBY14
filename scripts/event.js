@@ -21,6 +21,9 @@ function writeEvent() {
                 date: Date,
                 location: Location
             })
+            .then(()=>{
+                window.location.href = "";
+            })
 
         })
         } else {
