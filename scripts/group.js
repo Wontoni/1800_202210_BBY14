@@ -74,3 +74,27 @@ function generateCode() {
     }
     return code;
 }
+
+function populateGroups() {
+    let groupCardTemplate = document.getElementById("groupCardTemplate");
+    let groupCardGroup = document.getElementById("groupCardGroup");
+
+    db.collection("Groups")
+        .get()
+        .then(allGroups => {
+            allGroups.forEach(doc => {
+                var groupName = doc.data().groupName;
+                var groupCode= doc.data().groupCode;
+                let testGroupCard = groupCardTemplate.content.cloneNode(true);
+                console.log(testGroupCard);
+                testGroupCard.querySelector('.groupTitle').innerHTML = groupName;
+                testGroupCard.querySelector('.copyCode').value = groupCode;
+                groupCardGroup.appendChild(testGroupCard);
+            })
+        })
+}
+populateGroups();
+
+function copyCode() {
+    navigator.clipboard.writeText(document.getElementById("copyCode").value);
+  }

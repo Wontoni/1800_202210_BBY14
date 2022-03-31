@@ -33,8 +33,37 @@
 
     <!-- Body -->
     <div id="content">
+        <h1 class="display-5 fw-bold text-center">Groups</h1>
+        <div class="accordion">
+            <template id="groupCardTemplate">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button groupTitle" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            placeholder
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <h6>Members</h6>
+                            <ul style="list-style-type:none;">
+                            </ul>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control copyCode" placeholder="code"
+                                    aria-label="Group Code" aria-describedby="button-addon2" readonly>
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="copyCode()">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div id="groupCardGroup">
+            </div>
+
+        </div>
         <div class="text-center" id="mygroup">
-            <h1 class="display-5 fw-bold">Groups</h1>
             <div class="col-lg-6 mx-auto">
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <button type="button" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal"
@@ -89,7 +118,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" onclick="joinGroup()" data-bs-dismiss="modal">Join</button>
+                        <button type="button" class="btn btn-success" onclick="joinGroup()"
+                            data-bs-dismiss="modal">Join</button>
                     </div>
                 </div>
             </div>
