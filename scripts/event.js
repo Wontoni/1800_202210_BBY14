@@ -2,9 +2,10 @@ function writeEvent() {
     console.log("in")
     let EventName = document.getElementById("eventName").value;
     let Date = document.getElementById("date").value;
-    let Time = document.getElementById("time").value;
+    let StartTime = document.getElementById("startTime").value;
     let Location = document.getElementById("location").value;
-    console.log(EventName, Date, Time, Location);
+    let Duration = parseFloat(document.getElementById("duration").value);
+    console.log(EventName, Date, StartTime, Location, Duration);
 
 
     firebase.auth().onAuthStateChanged(user => {
@@ -17,9 +18,10 @@ function writeEvent() {
                 db.collection("Events").add({
                 userID: userID,
                 eventName: EventName,
-                time: Time,
+                startTime: StartTime,
                 date: Date,
-                location: Location
+                location: Location,
+                duration: Duration
             })
             .then(()=>{
                 window.location.href = "";

@@ -55,21 +55,47 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Event Name</label>
-                        <input type="text" class="form-control" id="eventName" placeholder="'PAX East'">
+                        <label for="eventname">Event Name</label>
+                        <input type="text" class="form-control" id="eventName" placeholder="'PAX East'" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Date</label>
+                        <label for="date">Date</label>
                         <input type="date" class="form-control" id="date">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Time</label>
-                        <input type="time" class="form-control" id="time">
+                        <label for="time">Start Time</label>
+                        <input type="time" class="form-control" id="startTime">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Location</label>
-                        <textarea class="form-control" id="location"
-                            placeholder="'Vancouver Convention Centre'"></textarea>
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="'Pacific Collosium'">
+                    </div>
+                    <div clas="form-group">
+                        <label for="duration">Duration: </label>
+                        <select name="duration" id="duration">
+                            <option value=0.25>00:15 hrs</option>
+                            <option value=0.50>00:30 hrs</option>
+                            <option value=0.75>00:45 hrs</option>
+                            <option value=1.00>01:00 hrs</option>
+                            <option value=1.25>01:15 hrs</option>
+                            <option value=1.50>01:30 hrs</option>
+                            <option value=1.75>01:45 hrs</option>
+                            <option value=2.00>02:00 hrs</option>
+                            <option value=2.25>02:15 hrs</option>
+                            <option value=2.50>02:30 hrs</option>
+                            <option value=2.75>02:45 hrs</option>
+                            <option value=3.00>03:00 hrs</option>
+                            <option value=3.25>03:15 hrs</option>
+                            <option value=3.50>03:30 hrs</option>
+                            <option value=3.75>03:45 hrs</option>
+                            <option value=4.00>04:00 hrs</option>
+                            <option value=4.25>04:15 hrs</option>
+                            <option value=4.50>04:30 hrs</option>
+                            <option value=4.75>04:45 hrs</option>
+                            <option value=5.00>05:00 hrs</option>
+                            <option value=24.00>All Day</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -77,6 +103,7 @@
                     <button type="button" class="btn btn-success" onclick="writeEvent()"
                         data-bs-dismiss="modal">Add</button>
                 </div>
+                
             </div>
         </div>
     </div>
