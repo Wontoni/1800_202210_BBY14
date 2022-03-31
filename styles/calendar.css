@@ -81,16 +81,21 @@ body {
     height: 100%;
     display: grid;
     grid-template-columns: 15% 85%;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
-    1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 4fr;
 }
 
 .time {
     grid-column: 1 / span 1;
+    min-height: 60px;
 }
 
 #day div {
     font-size: 14px;
+}
+
+.event-container {
+    display: grid;
+    grid-column: 2 / span 1;
 }
 
 #days {
