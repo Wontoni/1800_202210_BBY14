@@ -6,6 +6,14 @@ function toggleToDo() {
   bsOffcanvas.toggle();
 }
 
+// Add a "checked" symbol when clicking on a list item
+var list = document.getElementById("todoList");
+list.addEventListener('click', function (ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByClassName("listItem");
 var i;
@@ -24,18 +32,10 @@ var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function () {
     var div = this.parentElement;
-    div.textConent
+    console.log(div);
     div.style.display = "none";
   }
 }
-
-// Add a "checked" symbol when clicking on a list item
-var list = document.getElementById("todoList");
-list.addEventListener('click', function (ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
 
 var Task;
 // Create a new list item when clicking on the "Add" button
@@ -74,7 +74,7 @@ function newElement() {
         currentUser.get()
           .then(userDoc => {
             // Start a new collection and add all data in it.
-            db.collection("users").doc(user.uid).collection("ToDo-List").add({
+            db.collection("users").doc(user.uid).collection("ToDo-List").doc(Task).set({
               userID: userID, //for logged in user
               name: Task,
               completion: false,
@@ -83,6 +83,19 @@ function newElement() {
                 console.log("Successfully added task");
               });
           })
+
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function () {
+            var div = this.parentElement;
+            var taskDoc = div.textContent.substring(0, div.textContent.length - 1);
+            db.collection("users").doc(user.uid).collection("ToDo-List").doc(taskDoc).delete().then(() => {
+              console.log("Document successfully deleted! " + taskDoc);
+            }).catch((error) => {
+              console.error("Error removing document: ", error);
+            });
+            div.style.display = "none";
+          }
+        }
       } else {
         // No user is signed in.
         console.log("no user signed in");
@@ -119,17 +132,38 @@ function insertTasks(user) {
         span.appendChild(txt);
         li.appendChild(span);
 
+        // Deletes task items from firebase
         for (i = 0; i < close.length; i++) {
           close[i].onclick = function () {
             var div = this.parentElement;
+            var taskDoc = div.textContent.substring(0, div.textContent.length - 1);
+            db.collection("users").doc(user.uid).collection("ToDo-List").doc(taskDoc).delete().then(() => {
+              console.log("Document successfully deleted! " + taskDoc);
+            }).catch((error) => {
+              console.error("Error removing document: ", error);
+            });
             div.style.display = "none";
           }
         }
 
-        var list = document.getElementById("todoList");
+        // Adds a checked class to a list item if completion is true in firebase
         if (doc.data().completion == true) {
           li.classList.add('checked');
-        };
+        }
+        
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.getElementById("todoList");
+        list.addEventListener('click', function (ev) {
+          if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+
+            var taskDoc = ev.target.textContent.substring(0, ev.target.textContent.length - 1);
+            db.collection("users").doc(user.uid).collection("ToDo-List").doc(taskDoc).update({
+              completion: ev.target.classList.contains('checked'),
+            })
+          }
+        }, false);
+
         return doc.data();
       })
     })
