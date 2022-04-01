@@ -78,6 +78,7 @@ function generateCode() {
 function populateGroups() {
     let groupCardTemplate = document.getElementById("groupCardTemplate");
     let groupCardGroup = document.getElementById("groupCardGroup");
+    let i = 1;
 
     db.collection("Groups")
         .get()
@@ -86,10 +87,13 @@ function populateGroups() {
                 var groupName = doc.data().groupName;
                 var groupCode= doc.data().groupCode;
                 let testGroupCard = groupCardTemplate.content.cloneNode(true);
-                console.log(testGroupCard);
+                testGroupCard.querySelector(".accordion-button").setAttribute("data-bs-target", "#collapse" + i);
+                testGroupCard.querySelector(".accordion-button").setAttribute("aria-controls", "collapse" + i);
+                testGroupCard.querySelector(".accordion-collapse").id = "collapse" + i;
                 testGroupCard.querySelector('.groupTitle').innerHTML = groupName;
                 testGroupCard.querySelector('.copyCode').value = groupCode;
                 groupCardGroup.appendChild(testGroupCard);
+                i++;
             })
         })
 }

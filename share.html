@@ -34,7 +34,6 @@
     <!-- Body -->
     <div id="content">
         <h1 class="display-5 fw-bold text-center">Groups</h1>
-        <div class="accordion">
             <template id="groupCardTemplate">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -43,8 +42,7 @@
                             placeholder
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             <h6>Members</h6>
                             <ul style="list-style-type:none;">
@@ -61,8 +59,6 @@
             </template>
             <div id="groupCardGroup">
             </div>
-
-        </div>
         <div class="text-center" id="mygroup">
             <div class="col-lg-6 mx-auto">
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
