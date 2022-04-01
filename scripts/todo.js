@@ -1,6 +1,7 @@
 // Open/Close To-Do List
-var myOffcanvas = document.getElementById('todoOffCanvas')
-var bsOffcanvas = new bootstrap.Offcanvas(todoOffCanvas)
+var todoOffCanvas = document.getElementById("todoOffCanvas");
+var bsOffcanvas = new bootstrap.Offcanvas(todoOffCanvas);
+
 function toggleToDo() {
   bsOffcanvas.toggle();
 }
@@ -23,6 +24,7 @@ var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function () {
     var div = this.parentElement;
+    div.textConent
     div.style.display = "none";
   }
 }
@@ -35,6 +37,7 @@ list.addEventListener('click', function (ev) {
   }
 }, false);
 
+var Task;
 // Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
@@ -45,6 +48,7 @@ function newElement() {
   if (inputValue === '') {
     alert("You must write something!");
   } else {
+    Task = inputValue;
     document.getElementById("todoList").appendChild(li);
     document.getElementById("newToDo").value = "";
 
@@ -53,14 +57,7 @@ function newElement() {
     span.className = "closeTask";
     span.appendChild(txt);
     li.appendChild(span);
-
     document.getElementById("newToDo").value = "";
-
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "closeTask";
-    span.appendChild(txt);
-    li.appendChild(span);
 
     for (i = 0; i < close.length; i++) {
       close[i].onclick = function () {
@@ -68,36 +65,73 @@ function newElement() {
         div.style.display = "none";
       }
     }
-  }
 
-  let Task = document.getElementById("newToDo").value;
-
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      var currentUser = db.collection("users").doc(user.uid);
-      var userID = user.uid;
-      //get the document for current user.
-      currentUser.get()
-        .then(userDoc => {
-          // Start a new collection and add all data in it.
-          db.collection("users").doc(user.uid).collection("To-Do-List").add({
-            userID: userID,  //for logged in user
-            name: Task,
-            completion: Complete,
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        var currentUser = db.collection("users").doc(user.uid);
+        var userID = user.uid;
+        //get the document for current user.
+        currentUser.get()
+          .then(userDoc => {
+            // Start a new collection and add all data in it.
+            db.collection("users").doc(user.uid).collection("ToDo-List").add({
+              userID: userID, //for logged in user
+              name: Task,
+              completion: false,
+            })
+              .then(function () {
+                console.log("Successfully added task");
+              });
           })
-            .then(function () {
-              console.log("Successfully added task");
-            });
-        })
-    } else {
-      // No user is signed in.
-      console.log("no user signed in");
-    }
-  });
-
-
-
+      } else {
+        // No user is signed in.
+        console.log("no user signed in");
+      }
+    });
+  }
 }
 
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    //Populate ToDo List on startup
+    insertTasks(user);
+  } else {
+    // No user is signed in.
+    console.log("no user signed in");
+  }
+});
 
+function insertTasks(user) {
 
+  const tasks = db.collection("users").doc(user.uid).collection("ToDo-List").get()
+    .then(querySnapshot => {
+      querySnapshot.docs.map(doc => {
+        var li = document.createElement("li");
+        li.className = "listItem";
+        var inputValue = doc.data().name;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        document.getElementById("todoList").appendChild(li);
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "closeTask";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+          }
+        }
+
+        var list = document.getElementById("todoList");
+        if (doc.data().completion == true) {
+          li.classList.add('checked');
+        };
+        return doc.data();
+      })
+    })
+
+}
