@@ -37,13 +37,22 @@
 
     </div>
 
-    <!-- Event Add -->
+    <template id="CardTemplate">
+        <div class="card py-2 mx-2" style="width: 18rem;">
+            <img class="card-image card-img-top" src=" ..." alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event Title</h5>
+                <p class="card-text"></p>
+                
+            </div>
+        </div>
+    </template>
 
+    <!-- Event Add -->
     <!-- Button trigger modal -->
     <button type="button" class="addevent btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Event Add
     </button>
-
     <!-- Modal for Event -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -74,27 +83,27 @@
                     <div clas="form-group">
                         <label for="duration">Duration: </label>
                         <select name="duration" id="duration">
-                            <option value=0.25>00:15 hrs</option>
-                            <option value=0.50>00:30 hrs</option>
-                            <option value=0.75>00:45 hrs</option>
-                            <option value=1.00>01:00 hrs</option>
-                            <option value=1.25>01:15 hrs</option>
-                            <option value=1.50>01:30 hrs</option>
-                            <option value=1.75>01:45 hrs</option>
-                            <option value=2.00>02:00 hrs</option>
-                            <option value=2.25>02:15 hrs</option>
-                            <option value=2.50>02:30 hrs</option>
-                            <option value=2.75>02:45 hrs</option>
-                            <option value=3.00>03:00 hrs</option>
-                            <option value=3.25>03:15 hrs</option>
-                            <option value=3.50>03:30 hrs</option>
-                            <option value=3.75>03:45 hrs</option>
-                            <option value=4.00>04:00 hrs</option>
-                            <option value=4.25>04:15 hrs</option>
-                            <option value=4.50>04:30 hrs</option>
-                            <option value=4.75>04:45 hrs</option>
-                            <option value=5.00>05:00 hrs</option>
-                            <option value=24.00>All Day</option>
+                            <option value="0.25">00:15 hrs</option>
+                            <option value="0.50">00:30 hrs</option>
+                            <option value="0.75">00:45 hrs</option>
+                            <option value="1.00">01:00 hrs</option>
+                            <option value="1.25">01:15 hrs</option>
+                            <option value="1.50">01:30 hrs</option>
+                            <option value="1.75">01:45 hrs</option>
+                            <option value="2.00">02:00 hrs</option>
+                            <option value="2.25">02:15 hrs</option>
+                            <option value="2.50">02:30 hrs</option>
+                            <option value="2.75">02:45 hrs</option>
+                            <option value="3.00">03:00 hrs</option>
+                            <option value="3.25">03:15 hrs</option>
+                            <option value="3.50">03:30 hrs</option>
+                            <option value="3.75">03:45 hrs</option>
+                            <option value="4.00">04:00 hrs</option>
+                            <option value="4.25">04:15 hrs</option>
+                            <option value="4.50">04:30 hrs</option>
+                            <option value="4.75">04:45 hrs</option>
+                            <option value="5.00">05:00 hrs</option>
+                            <option value="24.00">All Day</option>
                         </select>
                     </div>
                 </div>
