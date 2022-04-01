@@ -117,9 +117,11 @@ body {
 }
 
 .addevent {
+    height: 40px;
     position: fixed;
     bottom: 12%;
-    right: 2%;
+    right: 5%;
+    border-radius: 20px;
 }
 
 @media only screen and (min-width: 851px) {
