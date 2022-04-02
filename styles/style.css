@@ -26,8 +26,13 @@ body {
 .login-grid {
     display: grid;
     height: auto;
-    grid-template-columns: 60% 40%;
-    grid-template-rows: 20% 80%;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
 }
 
 /* Notification styling*/
