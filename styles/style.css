@@ -30,3 +30,13 @@ body {
     grid-template-rows: 20% 80%;
 }
 
+/* Notification styling*/
+
+.notificationIcon-38 {
+    font-size: 38px;
+}
+
+#notifIcon:hover {
+    color: rgb(88, 88, 88);
+    cursor: pointer;
+}
