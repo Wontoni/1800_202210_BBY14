@@ -91,20 +91,21 @@ function populateGroups() {
                         var groupName = doc.data().groupName;
                         var groupCode = doc.data().groupCode;
                         let testGroupCard = groupCardTemplate.content.cloneNode(true);
-                        testGroupCard.querySelector(".accordion-button").setAttribute("data-bs-target", "#collapse" + c);
-                        testGroupCard.querySelector(".accordion-button").setAttribute("aria-controls", "collapse" + c);
-                        testGroupCard.querySelector(".accordion-collapse").id = "collapse" + c;
+                        testGroupCard.querySelector(".accordion-button").setAttribute("data-bs-target", `#collapse${c}`);
+                        testGroupCard.querySelector(".accordion-button").setAttribute("aria-controls", `collapse${c}`);
+                        testGroupCard.querySelector(".accordion-collapse").id = `collapse${c}`;
                         testGroupCard.querySelector(".groupTitle").innerHTML = groupName;
-                        testGroupCard.querySelector(".members").id = "g" + c + "members";
+                        testGroupCard.querySelector(".members").id = `g${c}members`;
 
                         for (let i = 0; i < doc.data().users.length; i++) {
                             var memberid = doc.data().users[i];
-                            console.log(memberid);
                             var memberRef = db.collection("users").doc(memberid);
-                            console.log(memberRef);
                             insertName(memberRef, c);
                         }
+                        testGroupCard.querySelector('.copyCode').id = `copyCode${c}`;
                         testGroupCard.querySelector('.copyCode').value = groupCode;
+                        testGroupCard.querySelector(".copybutton").id = `copybutton${c}`;
+                        testGroupCard.querySelector(".copybutton").setAttribute("onclick", `copyCode(${c})`);
                         groupCardGroup.appendChild(testGroupCard);
                         c++;
                     })
@@ -121,11 +122,11 @@ populateGroups();
 function insertName(memberRef, c) {
     memberRef.get().then(userDoc => {
         var membername = userDoc.data().name;
-        console.log(membername);
-        document.querySelector("#g" + c + "members").insertAdjacentHTML('beforeend', `<li>${membername}</li>`);
+        document.querySelector(`#g${c}members`).insertAdjacentHTML('beforeend', `<li>${membername}</li>`);
     })
 }
 
-function copyCode() {
-    navigator.clipboard.writeText(document.getElementById("copyCode").value);
+function copyCode(c) {
+    navigator.clipboard.writeText(document.querySelector(`#copyCode${c}`).value);
+    console.log("code saved")
 }
