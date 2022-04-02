@@ -51,3 +51,8 @@ function displayEachEvent() {
 
     document.querySelector(`[day="${document.querySelector("#date").value}"]`).appendChild(newDiv);
 }
+
+
+function displayEachMonthEvents() {
+    
+}
