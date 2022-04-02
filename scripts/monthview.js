@@ -22,20 +22,36 @@ function loadCalendar() {
     document.querySelector("#days").innerHTML = "";
 
     for (let i = 0; i < (monthdays + prevmonthdays + nextmonthdays); i++) {
+
+        let dateId = `"${2022}'-'${22}'-'${day}"`;
+
+        // console.log(date.getMonth() + 1)
+        currMonth = (date.getMonth() + 1).toString();
+        currYear = (date.getFullYear()).toString();
+        currDay = day.toString();
+
+        if (currMonth.length == 1) {
+            currMonth = `0${currMonth}`;
+        }
+        if (currDay.length == 1) {
+            currDay = `0${currDay}`;
+        }
+
         if (i < prevmonthdays) {
             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth"><span>${prevmonthday}</span></div>`);
             prevmonthday++;
         } else if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div id="currentday" class="bg-info"><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} id="currentday" class="bg-info"><span>${day}</span></div>`);
             day++;
         } else if (day <= monthdays) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay}><span>${day}</span></div>`);
             day++;
         } else if (nextmonthday <= nextmonthdays && nextmonthdays != 7) {
             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth"><span>${nextmonthday}</span></div>`);
             nextmonthday++;
         }
     }
+
 }
 
 function prevmonth() {
