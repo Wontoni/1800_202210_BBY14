@@ -23,8 +23,6 @@ function loadCalendar() {
 
     for (let i = 0; i < (monthdays + prevmonthdays + nextmonthdays); i++) {
 
-        let dateId = `"${2022}'-'${22}'-'${day}"`;
-
         // console.log(date.getMonth() + 1)
         currMonth = (date.getMonth() + 1).toString();
         currYear = (date.getFullYear()).toString();
