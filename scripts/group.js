@@ -100,7 +100,7 @@ function populateGroups() {
                         for (let i = 0; i < doc.data().users.length; i++) {
                             var memberid = doc.data().users[i];
                             var memberRef = db.collection("users").doc(memberid);
-                            insertName(memberRef, c);
+                            addName(memberRef, c, i);
                         }
                         testGroupCard.querySelector('.copyCode').id = `copyCode${c}`;
                         testGroupCard.querySelector('.copyCode').value = groupCode;
@@ -119,10 +119,14 @@ function populateGroups() {
 }
 populateGroups();
 
-function insertName(memberRef, c) {
+function addName(memberRef, c, i) {
     memberRef.get().then(userDoc => {
         var membername = userDoc.data().name;
-        document.querySelector(`#g${c}members`).insertAdjacentHTML('beforeend', `<li>${membername}</li>`);
+        if (i === 0) {
+            document.querySelector(`#g${c}members`).insertAdjacentHTML('beforeend', `<li><b>${membername}</b></li>`);
+        } else {
+            document.querySelector(`#g${c}members`).insertAdjacentHTML('beforeend', `<li>${membername}</b></li>`);
+        }   
     })
 }
 
