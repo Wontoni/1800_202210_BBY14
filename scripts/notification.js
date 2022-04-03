@@ -27,6 +27,7 @@ for (i = 0; i < closeNotif.length; i++) {
         div.style.display = "none";
         db.collection("Events").doc(eventDoc).delete().then(() => {
             console.log("Document successfully deleted! " + eventDoc);
+            changeNotifIcon();
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
@@ -39,19 +40,6 @@ for (i = 0; i < closeNotif.length; i++) {
         div.style.display = "none";
     }
 }
-
-let count = 0;
-document.getElementById("notifIcon").addEventListener("click",
-    function () {
-        if (count == 0) {
-            document.getElementById("notifIcon").innerHTML = "notifications_active";
-            count = 1;
-        }
-        else {
-            document.getElementById("notifIcon").innerHTML = "notifications_none";
-            count = 0;
-        }
-    });
 
 // First initialization of the current date
 var currentdate = new Date();
@@ -76,7 +64,6 @@ function newNotifications() {
 
                         // Create notification list items
                         if (doc.data().userID == user.uid) {
-
                             // Updates the currentdate variable to the current date every 1000ms
                             var currentdate = new Date();
 
@@ -84,23 +71,22 @@ function newNotifications() {
                             var eventYear = doc.data().date.substring(0, 4);
                             var eventMonth = doc.data().date.substring(5, 7);
 
-                            // Check if event start time is within 1 hours
+                            // Check if event start time is within 2 hours
                             var checkHour = parseInt(doc.data().startTime.substring(0, 2)) - currentdate.getHours();
-
-
                             if (checkHour < 0) {
                                 checkHour += 24;
                             }
 
-                            var checkMin = parseInt(doc.data().startTime.substring(3) - currentdate.getMinutes());
-                            if (checkHour == 1 && checkMin == 00) {
+
+                            // console.log(checkHour);
+                            if (checkHour == 1 || checkHour == 0) {
                                 var viableHour = true;
                             } else if (checkHour < 1) {
                                 var viableHour = true;
                             } else {
                                 var viableHour = false;
                             }
-                            
+
 
                             // Check if event date is within the day and month
 
@@ -127,14 +113,29 @@ function newNotifications() {
                                 var viableMonth = false;
                             }
 
-
+                            // console.log("Valid Day:" + viableDay);
+                            // console.log("Valid Month:" + viableMonth);
+                            // console.log("Valid Hour:" + viableHour);
+                            // console.log("Valid Sent:" + !doc.data().sentNotification);
                             // Create notifications
                             if (viableDay && viableMonth && viableHour && !doc.data().sentNotification) {
-
-                                var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime;
+                                var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
+                                console.log(eventDoc);
                                 db.collection("Events").doc(eventDoc).update({
                                     sentNotification: true,
                                 })
+
+                                currentUser.collection("eventNotifications").doc(eventDoc).set({
+                                    userID: userID,
+                                    eventName: doc.data().eventName,
+                                    startTime: doc.data().startTime,
+                                    date: doc.data().date,
+                                    location: doc.data().location,
+                                    duration: doc.data().duration,
+                                    sentNotification: false
+                                })
+
+
 
                                 var li = document.createElement("li");
                                 li.className = "notifItem";
@@ -197,6 +198,8 @@ function newNotifications() {
                                 timeItem.appendChild(time);
                                 descriptionList.appendChild(timeItem);
 
+
+
                                 // Location item
                                 var locationItem = document.createElement("li");
                                 locationItem.className = "notifDescItem";
@@ -213,9 +216,16 @@ function newNotifications() {
                                     closeNotif[i].onclick = function () {
                                         var div = this.parentElement;
                                         div.style.display = "none";
-                                        var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime;
+                                        var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
                                         db.collection("Events").doc(eventDoc).delete().then(() => {
                                             console.log("Document successfully deleted! " + eventDoc);
+                                            changeNotifIcon();
+                                        }).catch((error) => {
+                                            console.error("Error removing document: ", error);
+                                        });
+                                        currentUser.collection("eventNotifications").doc(eventDoc).delete().then(() => {
+                                            console.log("Document successfully deleted! " + eventDoc);
+                                            changeNotifIcon();
                                         }).catch((error) => {
                                             console.error("Error removing document: ", error);
                                         });
@@ -236,8 +246,147 @@ function newNotifications() {
 
 }
 
-setInterval(function () {
-    newNotifications();
-}, 1000); // Wait 1000ms before running again
+//Loops and checks for notifications every minute
+function surprise() {
+    (function loop() {
+        newNotifications();
+        changeNotifIcon();
+        var now = new Date();                  // allow for time passing
+        var delay = 60000 - (now % 60000); // exact ms to next minute interval
+        setTimeout(loop, delay);
+    })();
+}
+
+function insertUncheckedNotifications(user) {
+    const tasks = currentUser.collection("eventNotifications").get()
+        .then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+                var li = document.createElement("li");
+                li.className = "notifItem";
+                var notifTitle = doc.data().eventName;
+                var t = document.createTextNode(notifTitle);
+                li.appendChild(t);
+                document.getElementById("notifList").appendChild(li);
+
+                var closeNotif = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                closeNotif.className = "notifClose";
+                closeNotif.appendChild(txt);
+                li.appendChild(closeNotif);
+
+                // Event description
+                var descriptionList = document.createElement("ul");
+                descriptionList.className = "notifList";
+
+                // Date item
+                var dateItem = document.createElement("li");
+                dateItem.className = "notifDescItem";
+                var dateText = doc.data().date;
+                t = "Date: " + dateText;
+                var date = document.createTextNode(t);
+                dateItem.appendChild(date);
+                descriptionList.appendChild(dateItem);
+                li.appendChild(descriptionList);
+
+                // Time item
+                var timeItem = document.createElement("li");
+                timeItem.className = "notifDescItem";
+                var startTimeText = doc.data().startTime;
+                t = "Start: " + startTimeText;
+
+                var endTimeItem = document.createElement("li");
+                endTimeItem.className = "notifDescItem";
+                // Calculate end time
+                var startMinute = doc.data().startTime.substring(3);
+                var eventDuration = parseFloat(doc.data().duration);
+                var startHours = doc.data().startTime.substring(0, 2);
+
+                if (eventDuration >= 1) {
+                    var newHours = parseInt(startHours) + parseInt(eventDuration);
+                    var newMinutes = parseInt(startMinute) + parseInt(eventDuration * 60 % 60);
+                    var durationDecimal = parseFloat("0." + eventDuration.toString().split('.')[1]);
+                    var newMinutes = parseInt(startMinute) + (60 * durationDecimal);
+                } else {
+                    var newHours = doc.data().startTime.substring(0, 2);
+                    var newMinutes = parseInt(startMinute) + parseInt(eventDuration * 60 % 60);
+                }
+
+                if (newMinutes < 10) {
+                    newMinutes = "0" + newMinutes;
+                }
+                var endTimeText = newHours + ":" + newMinutes;
+
+                t += " End: " + endTimeText;
+
+                var time = document.createTextNode(t);
+                timeItem.appendChild(time);
+                descriptionList.appendChild(timeItem);
+
+
+
+                // Location item
+                var locationItem = document.createElement("li");
+                locationItem.className = "notifDescItem";
+                var locationText = doc.data().location;
+                t = "Location: " + locationText;
+                var loc = document.createTextNode(t);
+                locationItem.appendChild(loc);
+                descriptionList.appendChild(locationItem);
+
+                changeNotifIcon();
+                // Click on a close button to hide the current list item
+                var closeNotif = document.getElementsByClassName("notifClose");
+                var i;
+                for (i = 0; i < closeNotif.length; i++) {
+                    closeNotif[i].onclick = function () {
+                        var div = this.parentElement;
+                        div.style.display = "none";
+                        var eventDoc = user.uid + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
+                        db.collection("Events").doc(eventDoc).delete().then(() => {
+                            console.log("Document successfully deleted! " + eventDoc);
+                            changeNotifIcon();
+                        }).catch((error) => {
+                            console.error("Error removing document: ", error);
+                        });
+
+                        currentUser.collection("eventNotifications").doc(eventDoc).delete().then(() => {
+                            console.log("Document successfully deleted! " + eventDoc);
+                            changeNotifIcon();
+                        }).catch((error) => {
+                            console.error("Error removing document: ", error);
+                        });
+                    }
+                }
+                var num = document.getElementsByClassName('notifItem').length;
+
+                changeNotifIcon();
+                return doc.data();
+            })
+        })
+}
+
+//Change notification icon
+function changeNotifIcon(){
+    var notifCounter = document.getElementsByClassName('notifItem').length;
+    if (notifCounter > 0){
+        document.getElementById("notifIcon").innerHTML = "notifications_active";
+    } else {
+        document.getElementById("notifIcon").innerHTML = "notifications_none";
+    }
+
+}
+
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        var currentUser = db.collection("users").doc(user.uid);
+        var userID = user.uid;
+        surprise();
+        insertUncheckedNotifications(user);
+        changeNotifIcon();
+    } else {
+        // No user is signed in.
+        console.log("no user signed in");
+    }
+});
 
 
