@@ -7,7 +7,6 @@
 <footer class="navbar justify-content-evenly bg-info" style="height:70px;">
     <i class="material-icons md-48" onclick ="location.href='calendar.html';">calendar_today</i>
 
-
     <i class="material-icons md-48" onclick="toggleToDo()">check_box</i>
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="todoOffCanvas" aria-labelledby="todoOffCanvasLabel">
@@ -15,7 +14,7 @@
             <h5 class="offcanvas-title" id="todoOffCanvasLabel">To-Do List</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body todo-list">
+        <div class="offcanvas-body offcanvas-body-padding-0 todo-list">
             <div>
                 <div id="ToDo" class="todoHeader p-3 mb-2 bg-info">
                     <input type="text" id="newToDo" class="inputBtn" placeholder="Title...">

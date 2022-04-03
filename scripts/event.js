@@ -12,15 +12,17 @@ function writeEvent() {
             var currentUser = db.collection("users").doc(user.uid)
             var userID = user.uid;
 
+            var eventID = userID + "_" + EventName + "_" + StartTime;
             currentUser.get()
                 .then(userDoc => {
-                    db.collection("Events").add({
+                    db.collection("Events").doc(eventID).set({
                             userID: userID,
                             eventName: EventName,
                             startTime: StartTime,
                             date: Date,
                             location: Location,
-                            duration: Duration
+                            duration: Duration,
+                            sentNotification: false
                         })
                         .then(() => {
                             // window.location.href = "";

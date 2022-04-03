@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="./styles/style.css">
 
 <nav class="navbar navbar-light bg-info h-auto">
+    
     <div class="container-fluid">
         <div class="col d-flex justify-content-start">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -11,27 +12,46 @@
                 <span class="navbar-toggler-icon" onclick="insertName()"></span>
             </button>
         </div>
+
         <div class="col d-flex justify-content-center">
             <a class="navbar-brand m-0 text-center" href="calendar.html">Collab-endar</a>
         </div>
 
+
         <!-- Notification-->
         <div class="col d-flex justify-content-end">
-            <i id="notifIcon" class="material-icons-outlined notificationIcon-38">notifications_none</i>
+            <i onclick="toggleNotif()" id="notifIcon"
+                class="material-icons-outlined notificationIcon-38">notifications_none</i>
         </div>
 
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="notifOffCanvas" aria-labelledby="notifCanvasLabel">
+            <div class="offcanvas-header bg-info">
+                <h5 class="offcanvas-title" id="notifOffCanvasLabel">Notifications</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body offcanvas-body-padding-0 notifList">
+                <div>
+                    <ul id="notifList">
+                    </ul>
+                </div>
+            </div>
+
+        </div>
 
         <div class="offcanvas offcanvas-start w-50" tabindex="-1" id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header bg-info">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5><br>
-                <button type="button"  class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
-            </div>  
+            </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <h6 class="diplay">Hi, </h6><span id="name-goes-here"></span><h6></h6>
+                        <h6 class="diplay">Hi, </h6><span id="name-goes-here"></span>
+                        <h6></h6>
                     </li>
                     <li class="nav-item">
                         <h6 class="offcanvas-title">Calendar View</h6>
@@ -66,6 +86,6 @@
     </div>
 </nav>
 
-    <!-- Javascripts-->
-    <script src="./scripts/notification.js"></script>
-    <script src="./scripts/script.js"></script>
+<!-- Javascripts-->
+<script src="./scripts/notification.js"></script>
+<script src="./scripts/script.js"></script>

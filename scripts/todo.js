@@ -32,7 +32,6 @@ var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function () {
     var div = this.parentElement;
-    console.log(div);
     div.style.display = "none";
   }
 }
@@ -96,6 +95,8 @@ function newElement() {
             div.style.display = "none";
           }
         }
+
+        
       } else {
         // No user is signed in.
         console.log("no user signed in");
@@ -169,3 +170,20 @@ function insertTasks(user) {
     })
 
 }
+
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.getElementById("todoList");
+list.addEventListener('click', function (ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+
+    var taskDoc = ev.target.textContent.substring(0, ev.target.textContent.length - 1);
+    currentUser.collection("ToDo-List").doc(taskDoc).update({
+      completion: ev.target.classList.contains('checked'),
+    })
+  }
+}, false);
+
+
+

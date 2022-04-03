@@ -27,8 +27,8 @@
 }
 
 /* Set all odd list items to a different color (zebra-stripes) */
-.todo-list ul li:nth-child(odd) {
-  background: #f9f9f9;
+.todo-list ul li:nth-child(even) {
+  background: #e7e7e7;
 }
 
 /* Darker background-color on hover */
