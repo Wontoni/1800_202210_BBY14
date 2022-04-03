@@ -33,91 +33,25 @@
 
     <!-- Body -->
     <div id="content">
-        <h1 class="display-5 fw-bold text-center">Groups</h1>
-            <template id="groupCardTemplate">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button fs-5 fw-bold groupTitle" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <h1 class="display-5 fw-bold text-center">My Events</h1>
+        <template id="eventCardTemplate">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fs-5 fw-bold eventTitle" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Event Name - Date
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <p class="eventInfo">
                             placeholder
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <h6>Members</h6>
-                            <ul style="list-style-type:none;" class="members">
-                            </ul>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control copyCode" placeholder="code"
-                                    aria-label="Group Code" aria-describedby="button-addon2" readonly>
-                                <button class="btn btn-outline-secondary copybutton" type="button">Copy</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </template>
-            <div id="groupCardGroup">
-            </div>
-        <div class="text-center" id="mygroup">
-            <div class="col-lg-6 mx-auto">
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal"
-                        data-bs-target="#createGroup">
-                        Create Group
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal"
-                        data-bs-target="#addGroup">
-                        Join Group
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Groups -->
-        <div class="modal fade" id="createGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="createGroupLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createGroupLabel">Create Group</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Group Name</label>
-                            <input type="text" class="form-control" id="groupName" placeholder="My Group">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" onclick="createGroup()"
-                            data-bs-dismiss="modal">Create</button>
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="modal fade" id="addGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="addGroupLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addGroupLabel">Join Group</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Group Code</label>
-                            <input type="password" class="form-control" id="groupCode" placeholder="Code">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" onclick="joinGroup()"
-                            data-bs-dismiss="modal">Join</button>
-                    </div>
-                </div>
-            </div>
+        </template>
+        <div id="eventCardGroup">
         </div>
     </div>
 
@@ -131,7 +65,7 @@
     <!---------------------------------------------->
     <script src="./scripts/firebaseAPI_BBY14.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/group.js"></script>
+    <script src="./scripts/share.js"></script>
 
 
 </body>
