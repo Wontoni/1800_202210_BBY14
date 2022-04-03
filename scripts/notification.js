@@ -27,7 +27,7 @@ for (i = 0; i < closeNotif.length; i++) {
         div.style.display = "none";
         db.collection("Events").doc(eventDoc).delete().then(() => {
             console.log("Document successfully deleted! " + eventDoc);
-            changeNotifIcon();
+            changeNotifIcon(-1);
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
@@ -121,6 +121,7 @@ function newNotifications() {
                             if (viableDay && viableMonth && viableHour && !doc.data().sentNotification) {
                                 var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
                                 console.log(eventDoc);
+                                changeNotifIcon(1);
                                 db.collection("Events").doc(eventDoc).update({
                                     sentNotification: true,
                                 })
@@ -219,13 +220,12 @@ function newNotifications() {
                                         var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
                                         db.collection("Events").doc(eventDoc).delete().then(() => {
                                             console.log("Document successfully deleted! " + eventDoc);
-                                            changeNotifIcon();
+                                            changeNotifIcon(-1);
                                         }).catch((error) => {
                                             console.error("Error removing document: ", error);
                                         });
                                         currentUser.collection("eventNotifications").doc(eventDoc).delete().then(() => {
                                             console.log("Document successfully deleted! " + eventDoc);
-                                            changeNotifIcon();
                                         }).catch((error) => {
                                             console.error("Error removing document: ", error);
                                         });
@@ -250,7 +250,6 @@ function newNotifications() {
 function surprise() {
     (function loop() {
         newNotifications();
-        changeNotifIcon();
         var now = new Date();                  // allow for time passing
         var delay = 60000 - (now % 60000); // exact ms to next minute interval
         setTimeout(loop, delay);
@@ -333,7 +332,7 @@ function insertUncheckedNotifications(user) {
                 locationItem.appendChild(loc);
                 descriptionList.appendChild(locationItem);
 
-                changeNotifIcon();
+                changeNotifIcon(1);
                 // Click on a close button to hide the current list item
                 var closeNotif = document.getElementsByClassName("notifClose");
                 var i;
@@ -344,30 +343,33 @@ function insertUncheckedNotifications(user) {
                         var eventDoc = user.uid + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
                         db.collection("Events").doc(eventDoc).delete().then(() => {
                             console.log("Document successfully deleted! " + eventDoc);
-                            changeNotifIcon();
+                            changeNotifIcon(-1);
                         }).catch((error) => {
                             console.error("Error removing document: ", error);
                         });
 
                         currentUser.collection("eventNotifications").doc(eventDoc).delete().then(() => {
                             console.log("Document successfully deleted! " + eventDoc);
-                            changeNotifIcon();
+                            changeNotifIcon(-1);
                         }).catch((error) => {
                             console.error("Error removing document: ", error);
                         });
                     }
                 }
                 var num = document.getElementsByClassName('notifItem').length;
-
-                changeNotifIcon();
                 return doc.data();
             })
         })
 }
 
 //Change notification icon
-function changeNotifIcon(){
-    var notifCounter = document.getElementsByClassName('notifItem').length;
+function changeNotifIcon(num){
+    var notifCounter = 0;
+    notifCounter += num;
+    console.log(notifCounter)
+    if (notifCounter == 0) {
+        notifCounter = document.getElementsByClassName("notifItem").length;
+    }
     if (notifCounter > 0){
         document.getElementById("notifIcon").innerHTML = "notifications_active";
     } else {
@@ -382,7 +384,7 @@ firebase.auth().onAuthStateChanged(user => {
         var userID = user.uid;
         surprise();
         insertUncheckedNotifications(user);
-        changeNotifIcon();
+        changeNotifIcon(0);
     } else {
         // No user is signed in.
         console.log("no user signed in");
