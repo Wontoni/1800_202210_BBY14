@@ -106,6 +106,7 @@ function populateGroups() {
                         testGroupCard.querySelector('.copyCode').value = groupCode;
                         testGroupCard.querySelector(".copybutton").id = `copybutton${c}`;
                         testGroupCard.querySelector(".copybutton").setAttribute("onclick", `copyCode(${c})`);
+                        testGroupCard.querySelector('a').onclick = () => setGroupEvents(doc.id);
                         groupCardGroup.appendChild(testGroupCard);
                         c++;
                     })
@@ -133,4 +134,8 @@ function addName(memberRef, c, i) {
 function copyCode(c) {
     navigator.clipboard.writeText(document.querySelector(`#copyCode${c}`).value);
     console.log("code saved")
+}
+
+function setGroupEvents(id){
+    localStorage.setItem ('groupID', id);
 }
