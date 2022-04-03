@@ -25,7 +25,6 @@ function writeEvent() {
                             sentNotification: false
                         })
                         .then(() => {
-                            // window.location.href = "";
                             displayEachEvent();
                             document.querySelector("#eventName").value = "";
                             document.querySelector("#date").value = "";
@@ -43,7 +42,7 @@ function writeEvent() {
 }
 
 function displayEachEvent() {
-    newDiv = document.createElement("div");
+    let newDiv = document.createElement("div");
     newDiv.classList.add("event");
     newDiv.innerHTML = document.querySelector("#eventName").value;
 

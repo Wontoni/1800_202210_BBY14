@@ -60,6 +60,71 @@ function loadCalendar() {
              nextmonthday++;
         }
     }
+
+    displayEachMonthEvents();
+    displayGroupMonthEvents();
+}
+
+function displayEachMonthEvents() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            let userID = user.uid;
+            db.collection("Events").where("userID", "==", userID).orderBy("startTime").get()
+                .then(eventList => {
+                    eventList.forEach(event => {
+                        try {
+                            let eventDate = event.data().date;
+                            let node = document.querySelector(`[day="${eventDate}"]`);
+                            let newDiv = document.createElement("div");
+                            newDiv.classList.add("event");
+                            newDiv.innerHTML = event.data().eventName;
+                            node.appendChild(newDiv)
+                        } catch (e) {
+                            // Do Nothing!
+                        }
+                    })
+                })
+        }
+    });
+}
+
+function displayGroupMonthEvents() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            let userID = user.uid;
+            db.collection("Groups").where("users", "array-contains", userID)
+                .get()
+                .then(snap => {
+                    queryData = snap.docs;
+                    queryData.forEach(doc => {
+                        // console.log(doc.id);
+                        loadGroupEvents(doc.id, userID);
+                    })
+                })
+        }
+    });
+}
+
+function loadGroupEvents(groupID, userID) {
+    db.collection("Events").where("groupID", "array-contains", groupID).get()
+        .then(eventList => {
+            eventList.forEach(event => {
+                try {
+                    if (event.data().userID != userID) {
+                        let eventDate = event.data().date;
+                        let node = document.querySelector(`[day="${eventDate}"]`);
+                        newDiv = document.createElement("div");
+                        newDiv.innerHTML = event.data().eventName;
+                        node.appendChild(newDiv)
+                    } else {
+                        console.log("user created this event.");
+                    }
+
+                } catch (e) {
+                    //Do nothing.
+                }
+            })
+        })
 }
 
 function prevweek() {

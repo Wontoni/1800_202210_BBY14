@@ -51,7 +51,7 @@ function loadCalendar() {
     }
 
     displayEachMonthEvents();
-    displayGroupMonthEvents()
+    displayGroupMonthEvents();
 }
 
 
@@ -59,18 +59,18 @@ function displayEachMonthEvents() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             let userID = user.uid;
-            db.collection("Events").where("userID", "==", userID).get()
+            db.collection("Events").where("userID", "==", userID).orderBy("startTime").get()
                 .then(eventList => {
                     eventList.forEach(event => {
                         try {
-
                             let eventDate = event.data().date;
                             let node = document.querySelector(`[day="${eventDate}"]`);
-                            newDiv = document.createElement("div");
+                            let newDiv = document.createElement("div");
+                            newDiv.classList.add("event");
                             newDiv.innerHTML = event.data().eventName;
                             node.appendChild(newDiv)
                         } catch (e) {
-                            // console.log(e)
+                            // Do Nothing!
                         }
                     })
                 })
@@ -111,7 +111,7 @@ function loadGroupEvents(groupID, userID) {
                     }
 
                 } catch (e) {
-                    // console.log(e)
+                    //Do Nothing.
                 }
             })
         })
