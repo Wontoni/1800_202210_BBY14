@@ -17,7 +17,6 @@ body {
 }
 
 #content {
-    overflow-y: scroll;
     grid-column: 1;
     grid-row: 2;
     position: relative;
@@ -77,7 +76,7 @@ h1 {
 }
 
 /* Darker background-color on hover */
-.notifList ul li:hover{
+.notifList ul li:hover {
     background: #ddd;
 
 }
@@ -99,9 +98,69 @@ h1 {
     right: 0;
     top: 0;
     padding: 12px 16px 12px 16px;
-  }
-  
-  .notifClose:hover {
+}
+
+.notifClose:hover {
     background-color: #f44336;
     color: white;
-  }
+}
+
+
+
+/* Index Styling */
+.index-container {
+    display: flexbox;
+    overflow-x: hidden;
+}
+
+.index-container img {
+    height: 75%;
+    width: 100%;
+}
+
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    justify-content: center;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab li {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+
+/* Create an active/current tablink class */
+.tab li h1.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.tabClose:hover {
+    cursor: pointer;
+}
+
+.tabsNav{
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+}
+
+.tabsNav li {
+    display: inline-block;
+    padding-left: 6%;
+    padding-right: 6%;
+}
