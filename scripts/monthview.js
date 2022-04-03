@@ -50,6 +50,31 @@ function loadCalendar() {
         }
     }
 
+    displayEachMonthEvents();
+}
+
+
+function displayEachMonthEvents() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            let userID = user.uid;
+            db.collection("Events").where("userID", "==", userID).get()
+                .then(eventList => {
+                    eventList.forEach(event => {
+                        try {
+
+                            let eventDate = event.data().date;
+                            let node = document.querySelector(`[day="${eventDate}"]`);
+                            newDiv = document.createElement("div");
+                            newDiv.innerHTML = event.data().eventName;
+                            node.appendChild(newDiv)
+                        } catch (e) {
+                            // console.log(e)
+                        }
+                    })
+                })
+        }
+    });
 }
 
 function prevmonth() {
@@ -69,3 +94,4 @@ function currentmonth() {
 }
 
 loadCalendar();
+// displayEachMonthEvents();

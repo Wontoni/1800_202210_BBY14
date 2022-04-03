@@ -43,18 +43,10 @@ function writeEvent() {
 }
 
 function displayEachEvent() {
-    // document.querySelector(`[day="2022-04-02"]`).style.backgroundColor = "blue";
     newDiv = document.createElement("div");
     newDiv.classList.add("event");
-    newDiv.addEventListener("click", () => {
-
-    })
     newDiv.innerHTML = document.querySelector("#eventName").value;
 
     document.querySelector(`[day="${document.querySelector("#date").value}"]`).appendChild(newDiv);
 }
 
-
-function displayEachMonthEvents() {
-    
-}

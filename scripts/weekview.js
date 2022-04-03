@@ -24,20 +24,39 @@ function loadCalendar() {
     document.querySelector("#days").innerHTML = "";
 
     for (let i = 0; i < 7; i++) {
+
+        currMonth = (date.getMonth() + 1).toString();
+        currYear = (date.getFullYear()).toString();
+        currDay = day.toString();
+
+        if (currMonth.length == 1) {
+            currMonth = `0${currMonth}`;
+        }
+        if (currDay.length == 1) {
+            currDay = `0${currDay}`;
+        }
+
         if (day <= 0 && i < prevmonthdays) {
             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div><span>${prevmonthday}</span></div>`);
             prevmonthday++;
         } else if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div id="currentday" class="bg-info"><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} id="currentday" class="bg-info"><span>${day}</span></div>`);
             day++;
         } else if (day <= monthdays) {
             if (day <= 0) {
                 day = 1;
             }
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay}><span>${day}</span></div>`);
             day++;
         } else if (nextmonthday <= nextmonthdays && nextmonthdays != 7) {
-             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div><span>${nextmonthday}</span></div>`);
+            nextMonth = (date.getMonth()+2).toString();
+            if (nextMonth.length == 1) {
+                nextMonth = `0${nextMonth}`;
+            }
+            if (nextmonthday.toString().length == 1) {
+                nextDay = `0${nextmonthday}`;
+            }
+             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${nextMonth}-${nextDay}><span>${nextmonthday}</span></div>`);
              nextmonthday++;
         }
     }
