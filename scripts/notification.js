@@ -23,14 +23,15 @@ var closeNotif = document.getElementsByClassName("notifClose");
 var i;
 for (i = 0; i < closeNotif.length; i++) {
     closeNotif[i].onclick = function () {
+        changeNotifIcon(-1);
         var div = this.parentElement;
         div.style.display = "none";
-        db.collection("Events").doc(eventDoc).delete().then(() => {
-            console.log("Document successfully deleted! " + eventDoc);
-            changeNotifIcon(-1);
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-        });
+        // db.collection("Events").doc(eventDoc).delete().then(() => {
+        //     console.log("Document successfully deleted! " + eventDoc);
+        //     changeNotifIcon(-1);
+        // }).catch((error) => {
+        //     console.error("Error removing document: ", error);
+        // });
     }
 }
 
@@ -218,14 +219,15 @@ function newNotifications() {
                                         var div = this.parentElement;
                                         div.style.display = "none";
                                         var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
-                                        db.collection("Events").doc(eventDoc).delete().then(() => {
-                                            console.log("Document successfully deleted! " + eventDoc);
-                                            changeNotifIcon(-1);
-                                        }).catch((error) => {
-                                            console.error("Error removing document: ", error);
-                                        });
+                                        // db.collection("Events").doc(eventDoc).delete().then(() => {
+                                        //     console.log("Document successfully deleted! " + eventDoc);
+                                        //     changeNotifIcon(-1);
+                                        // }).catch((error) => {
+                                        //     console.error("Error removing document: ", error);
+                                        // });
                                         currentUser.collection("eventNotifications").doc(eventDoc).delete().then(() => {
                                             console.log("Document successfully deleted! " + eventDoc);
+                                            changeNotifIcon(-1);
                                         }).catch((error) => {
                                             console.error("Error removing document: ", error);
                                         });
@@ -341,12 +343,12 @@ function insertUncheckedNotifications(user) {
                         var div = this.parentElement;
                         div.style.display = "none";
                         var eventDoc = user.uid + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
-                        db.collection("Events").doc(eventDoc).delete().then(() => {
-                            console.log("Document successfully deleted! " + eventDoc);
-                            changeNotifIcon(-1);
-                        }).catch((error) => {
-                            console.error("Error removing document: ", error);
-                        });
+                        // db.collection("Events").doc(eventDoc).delete().then(() => {
+                        //     console.log("Document successfully deleted! " + eventDoc);
+                        //     changeNotifIcon(-1);
+                        // }).catch((error) => {
+                        //     console.error("Error removing document: ", error);
+                        // });
 
                         currentUser.collection("eventNotifications").doc(eventDoc).delete().then(() => {
                             console.log("Document successfully deleted! " + eventDoc);
@@ -392,3 +394,10 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 
+
+// Toast JS
+
+var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+var toastList = toastElList.map(function (toastEl) {
+  return new bootstrap.Toast(toastEl, option)
+})
