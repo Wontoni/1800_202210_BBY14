@@ -24,14 +24,14 @@ function writeEvent() {
                             duration: Duration,
                             sentNotification: false
                         })
-                        // .then(() => {
-                        //     displayEachEvent();
-                        //     document.querySelector("#eventName").value = "";
-                        //     document.querySelector("#date").value = "";
-                        //     document.querySelector("#startTime").value = "";
-                        //     document.querySelector("#location").value = "";
-                        //     document.querySelector("#duration").value = "";                            
-                        // })
+                        .then(() => {
+                            displayEachEvent();
+                            document.querySelector("#eventName").value = "";
+                            document.querySelector("#date").value = "";
+                            document.querySelector("#startTime").value = "";
+                            document.querySelector("#location").value = "";
+                            document.querySelector("#duration").value = "";                            
+                        })
 
                 })
         } else {
@@ -41,11 +41,11 @@ function writeEvent() {
 
 }
 
-// function displayEachEvent() {
-//     let newDiv = document.createElement("div");
-//     newDiv.classList.add("event");
-//     newDiv.innerHTML = document.querySelector("#eventName").value;
+function displayEachEvent() {
+    let newDiv = document.createElement("div");
+    newDiv.classList.add("event");
+    newDiv.innerHTML = document.querySelector("#eventName").value;
 
-//     document.querySelector(`[day="${document.querySelector("#date").value}"]`).appendChild(newDiv);
-// }
+    document.querySelector(`[day="${document.querySelector("#date").value}"]`).appendChild(newDiv);
+}
 
