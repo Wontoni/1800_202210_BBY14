@@ -36,53 +36,53 @@ function loadCalendar() {
         }
 
         if (i < prevmonthdays) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth mvdays"><span>${prevmonthday}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth mvdays"><span>${prevmonthday}</span><div></div></div>`);
             prevmonthday++;
         } else if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} id="currentday" class="bg-info mvdays"><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div id="currentday" class="bg-info mvdays"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="e"></div></div>`);
             day++;
         } else if (day <= monthdays) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} class="mvdays"><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="mvdays"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="e"></div></div>`);
             day++;
         } else if (nextmonthday <= nextmonthdays && nextmonthdays != 7) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth mvdays"><span>${nextmonthday}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth mvdays"><span>${nextmonthday}</span><div></div></div>`);
             nextmonthday++;
         }
     }
 
     displayEachMonthEvents();
-    displayGroupMonthEvents();
+    // displayGroupMonthEvents();
 }
 
+
+// function displayEachMonthEvents() {
+//     firebase.auth().onAuthStateChanged(user => {
+//         if (user) {
+//             let userID = user.uid;
+//             db.collection("Events").where("userID", "==", userID).orderBy("startTime").get()
+//                 .then(eventList => {
+//                     eventList.forEach(event => {
+//                         try {
+//                             let eventDate = event.data().date;
+//                             var element = document.querySelector(`[day="${eventDate}"]`);
+//                             var num = element.getElementsByTagName('*').length;
+//                             if (num < 15) {
+//                                 let node = document.querySelector(`[day="${eventDate}"]`);
+//                                 let newDiv = document.createElement("div");
+//                                 newDiv.classList.add("event");
+//                                 newDiv.innerHTML = event.data().eventName;
+//                                 node.appendChild(newDiv)
+//                             }
+//                         } catch (e) {
+//                             // Do Nothing!
+//                         }
+//                     })
+//                 })
+//         }
+//     });
+// }
 
 function displayEachMonthEvents() {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            let userID = user.uid;
-            db.collection("Events").where("userID", "==", userID).orderBy("startTime").get()
-                .then(eventList => {
-                    eventList.forEach(event => {
-                        try {
-                            let eventDate = event.data().date;
-                            var element = document.querySelector(`[day="${eventDate}"]`);
-                            var num = element.getElementsByTagName('*').length;
-                            if (num < 4) {
-                                let node = document.querySelector(`[day="${eventDate}"]`);
-                                let newDiv = document.createElement("div");
-                                newDiv.classList.add("event");
-                                newDiv.innerHTML = event.data().eventName;
-                                node.appendChild(newDiv)
-                            }
-                        } catch (e) {
-                            // Do Nothing!
-                        }
-                    })
-                })
-        }
-    });
-}
-
-function displayGroupMonthEvents() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             let userID = user.uid;
@@ -93,7 +93,7 @@ function displayGroupMonthEvents() {
                     queryData = snap.docs;
                     queryData.forEach(doc => {
                         // console.log(doc.id);
-                        loadGroupEvents(doc.id, userID, c);
+                        loadEvents(doc.id, userID, c);
                         c++;
                     })
                 })
@@ -101,17 +101,17 @@ function displayGroupMonthEvents() {
     });
 }
 
-function loadGroupEvents(groupID, userID, c) {
-    db.collection("Events").where("groupID", "array-contains", groupID).get()
+function loadEvents(groupID, userID, c) {
+    db.collection("Events").orderBy("startTime").get()
         .then(eventList => {
             eventList.forEach(event => {
                 try {
-                    if (event.data().userID != userID) {
+                    if (event.data().userID == userID && c == 0 || (event.data().userID != userID && event.data().groupID.includes(groupID))) {
                         var colors = ["#5EF38C", "#FC7753", "#DBD56E", "#82A3A1", "#FDCA40", "#60935D", "#7B5E7B", "#5998C5", "#E03616", "#63B995"];
                         let eventDate = event.data().date;
                         var element = document.querySelector(`[day="${eventDate}"]`);
                         var num = element.getElementsByTagName('*').length;
-                        if (num < 4) {
+                        if (num < 15) {
                             let node = document.querySelector(`[day="${eventDate}"]`);
                             let newDiv = document.createElement("div");
                             newDiv.classList.add(`event`);
@@ -124,7 +124,7 @@ function loadGroupEvents(groupID, userID, c) {
                     }
 
                 } catch (e) {
-                    //Do Nothing.
+                    //Do nothing.
                 }
             })
         })

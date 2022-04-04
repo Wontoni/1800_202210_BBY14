@@ -19,7 +19,9 @@ function createGroup() {
                             merge: true
                         })
                         .then(() => {
-                            window.location.href = "";
+                            document.querySelector("#groupCardGroup").innerHTML = "";
+                            populateGroups();
+                            document.querySelector("#groupName").value = "";
                         })
                 })
         } else {
@@ -57,7 +59,9 @@ function joinGroup() {
                             merge: true
                         })
                         .then(() => {
-                            window.location.href = "";
+                            document.querySelector("#groupCardGroup").innerHTML = "";
+                            populateGroups();
+                            document.querySelector("#groupCode").value = "";
                         })
                 })
         } else {

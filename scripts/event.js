@@ -25,7 +25,8 @@ function writeEvent() {
                             sentNotification: false
                         })
                         .then(() => {
-                            displayEachEvent();
+                            document.querySelectorAll('.e').forEach(e => e.innerHTML = "");
+                            displayEachMonthEvents();
                             document.querySelector("#eventName").value = "";
                             document.querySelector("#date").value = "";
                             document.querySelector("#startTime").value = "";
