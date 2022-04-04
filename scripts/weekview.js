@@ -37,7 +37,7 @@ function loadCalendar() {
         }
 
         if (day <= 0 && i < prevmonthdays) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="bg-info wvdays"><span>${prevmonthday}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="wvdays"><span>${prevmonthday}</span></div>`);
             prevmonthday++;
         } else if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} id="currentday" class="bg-info wvdays"><span>${day}</span></div>`);
@@ -46,7 +46,7 @@ function loadCalendar() {
             if (day <= 0) {
                 day = 1;
             }
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} class="bg-info wvdays"><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} class="wvdays"><span>${day}</span></div>`);
             day++;
         } else if (nextmonthday <= nextmonthdays && nextmonthdays != 7) {
             nextMonth = (date.getMonth()+2).toString();
@@ -56,7 +56,7 @@ function loadCalendar() {
             if (nextmonthday.toString().length == 1) {
                 nextDay = `0${nextmonthday}`;
             }
-             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${nextMonth}-${nextDay}><span>${nextmonthday}</span></div>`);
+             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${nextMonth}-${nextDay} class="wvdays"><span>${nextmonthday}</span></div>`);
              nextmonthday++;
         }
     }
