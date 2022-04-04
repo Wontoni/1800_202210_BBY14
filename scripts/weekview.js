@@ -74,11 +74,15 @@ function displayEachMonthEvents() {
                     eventList.forEach(event => {
                         try {
                             let eventDate = event.data().date;
-                            let node = document.querySelector(`[day="${eventDate}"]`);
-                            let newDiv = document.createElement("div");
-                            newDiv.classList.add("event");
-                            newDiv.innerHTML = event.data().eventName;
-                            node.appendChild(newDiv)
+                            var element = document.querySelector(`[day="${eventDate}"]`);
+                            var num = element.getElementsByTagName('*').length;
+                            if (num < 15) {
+                                let node = document.querySelector(`[day="${eventDate}"]`);
+                                let newDiv = document.createElement("div");
+                                newDiv.classList.add("event");
+                                newDiv.innerHTML = event.data().eventName;
+                                node.appendChild(newDiv)
+                            }
                         } catch (e) {
                             // Do Nothing!
                         }
@@ -115,12 +119,16 @@ function loadGroupEvents(groupID, userID, c) {
                     if (event.data().userID != userID) {
                         var colors = ["#5EF38C", "#FC7753", "#DBD56E", "#82A3A1", "#FDCA40", "#60935D", "#7B5E7B", "#5998C5", "#E03616", "#63B995"];
                         let eventDate = event.data().date;
-                        let node = document.querySelector(`[day="${eventDate}"]`);
-                        let newDiv = document.createElement("div");
-                        newDiv.classList.add(`event`);
-                        newDiv.innerHTML = event.data().eventName;
-                        newDiv.style.backgroundColor = colors[c];
-                        node.appendChild(newDiv)
+                        var element = document.querySelector(`[day="${eventDate}"]`);
+                        var num = element.getElementsByTagName('*').length;
+                        if (num < 4) {
+                            let node = document.querySelector(`[day="${eventDate}"]`);
+                            let newDiv = document.createElement("div");
+                            newDiv.classList.add(`event`);
+                            newDiv.innerHTML = event.data().eventName;
+                            newDiv.style.backgroundColor = colors[c];
+                            node.appendChild(newDiv)
+                        }
                     } else {
                         console.log("user created this event.");
                     }
