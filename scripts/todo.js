@@ -1,10 +1,11 @@
-// Open/Close To-Do List
-var todoOffCanvas = document.getElementById("todoOffCanvas");
-var bsOffcanvas = new bootstrap.Offcanvas(todoOffCanvas);
+// Open/Close ToDo List
+var todoCanvas = document.getElementById("todoOffCanvas");
+var todoOffcanvas = new bootstrap.Offcanvas(todoCanvas);
 
 function toggleToDo() {
-  bsOffcanvas.toggle();
+    todoOffcanvas.toggle();
 }
+
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.getElementById("todoList");
