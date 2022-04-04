@@ -165,19 +165,6 @@ function insertTasks(user) {
           li.classList.add('checked');
         }
 
-        // Add a "checked" symbol when clicking on a list item
-        var list = document.getElementById("todoList");
-        list.addEventListener('click', function (ev) {
-          if (ev.target.tagName === 'LI') {
-            ev.target.classList.toggle('checked');
-
-            var taskDoc = ev.target.textContent.substring(0, ev.target.textContent.length - 1);
-            db.collection("users").doc(user.uid).collection("ToDo-List").doc(taskDoc).update({
-              completion: ev.target.classList.contains('checked'),
-            })
-          }
-        }, false);
-
         return doc.data();
       })
     })
@@ -185,18 +172,7 @@ function insertTasks(user) {
 }
 
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.getElementById("todoList");
-list.addEventListener('click', function (ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
 
-    var taskDoc = ev.target.textContent.substring(0, ev.target.textContent.length - 1);
-    currentUser.collection("ToDo-List").doc(taskDoc).update({
-      completion: ev.target.classList.contains('checked'),
-    })
-  }
-}, false);
 
 
 
