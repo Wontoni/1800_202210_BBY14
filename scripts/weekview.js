@@ -37,16 +37,16 @@ function loadCalendar() {
         }
 
         if (day <= 0 && i < prevmonthdays) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div><span>${prevmonthday}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="bg-info wvdays"><span>${prevmonthday}</span></div>`);
             prevmonthday++;
         } else if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} id="currentday" class="bg-info"><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} id="currentday" class="bg-info wvdays"><span>${day}</span></div>`);
             day++;
         } else if (day <= monthdays) {
             if (day <= 0) {
                 day = 1;
             }
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay}><span>${day}</span></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div day=${currYear}-${currMonth}-${currDay} class="bg-info wvdays"><span>${day}</span></div>`);
             day++;
         } else if (nextmonthday <= nextmonthdays && nextmonthdays != 7) {
             nextMonth = (date.getMonth()+2).toString();
@@ -92,29 +92,34 @@ function displayGroupMonthEvents() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             let userID = user.uid;
+            let c = 0;
             db.collection("Groups").where("users", "array-contains", userID)
                 .get()
                 .then(snap => {
                     queryData = snap.docs;
                     queryData.forEach(doc => {
                         // console.log(doc.id);
-                        loadGroupEvents(doc.id, userID);
+                        loadGroupEvents(doc.id, userID, c);
+                        c++;
                     })
                 })
         }
     });
 }
 
-function loadGroupEvents(groupID, userID) {
+function loadGroupEvents(groupID, userID, c) {
     db.collection("Events").where("groupID", "array-contains", groupID).get()
         .then(eventList => {
             eventList.forEach(event => {
                 try {
                     if (event.data().userID != userID) {
+                        var colors = ["#5EF38C", "#FC7753", "#DBD56E", "#82A3A1", "#FDCA40", "#60935D", "#7B5E7B", "#5998C5", "#E03616", "#63B995"];
                         let eventDate = event.data().date;
                         let node = document.querySelector(`[day="${eventDate}"]`);
-                        newDiv = document.createElement("div");
+                        let newDiv = document.createElement("div");
+                        newDiv.classList.add(`event`);
                         newDiv.innerHTML = event.data().eventName;
+                        newDiv.style.backgroundColor = colors[c];
                         node.appendChild(newDiv)
                     } else {
                         console.log("user created this event.");
