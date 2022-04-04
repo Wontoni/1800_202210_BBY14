@@ -121,6 +121,10 @@ firebase.auth().onAuthStateChanged(user => {
     list.addEventListener('click', function (ev) {
       if (ev.target.tagName === 'LI') {
         ev.target.classList.toggle('checked');
+        var taskDoc = ev.target.textContent.substring(0, ev.target.textContent.length - 1);
+        db.collection("users").doc(user.uid).collection("ToDo-List").doc(taskDoc).update({
+          completion: ev.target.classList.contains('checked'),
+        })
       }
     }, false);
   } else {
