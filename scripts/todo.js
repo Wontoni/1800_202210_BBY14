@@ -95,8 +95,6 @@ function newElement() {
             div.style.display = "none";
           }
         }
-
-        
       } else {
         // No user is signed in.
         console.log("no user signed in");
@@ -105,10 +103,26 @@ function newElement() {
   }
 }
 
+// Add a "checked" symbol when clicking on a list item
+var list = document.getElementById("todoList");
+list.addEventListener('click', function (ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     //Populate ToDo List on startup
     insertTasks(user);
+
+    // Add a "checked" symbol when clicking on a list item
+    var list = document.getElementById("todoList");
+    list.addEventListener('click', function (ev) {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked');
+      }
+    }, false);
   } else {
     // No user is signed in.
     console.log("no user signed in");
@@ -116,7 +130,6 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 function insertTasks(user) {
-
   const tasks = db.collection("users").doc(user.uid).collection("ToDo-List").get()
     .then(querySnapshot => {
       querySnapshot.docs.map(doc => {
@@ -151,7 +164,7 @@ function insertTasks(user) {
         if (doc.data().completion == true) {
           li.classList.add('checked');
         }
-        
+
         // Add a "checked" symbol when clicking on a list item
         var list = document.getElementById("todoList");
         list.addEventListener('click', function (ev) {
