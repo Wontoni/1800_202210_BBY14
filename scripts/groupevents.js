@@ -18,6 +18,7 @@ function populateEventList() {
                         var duration = doc.data().duration;
                         var location = doc.data().location;
                         var startTime = doc.data().startTime;
+                        var creatorID = doc.data().userID;
 
                         let testEventCard = eventCardTemplate.content.cloneNode(true);
                         testEventCard.querySelector(".accordion-button").setAttribute("data-bs-target", `#collapse${c}`);
@@ -29,6 +30,8 @@ function populateEventList() {
                             <br>Date: ${date} <br>Start Time: ${startTime} 
                             <br>Duration: ${duration} hours 
                             <br>Location: ${location}`;
+                        testEventCard.querySelector(".eventInfo").id = `eventi${c}`;
+                        getCreatorName(creatorID, c);
                         eventCardGroup.appendChild(testEventCard);
                         c++;
                     })
@@ -47,4 +50,15 @@ function insertGroupName(groupRef) {
         var groupName = doc.data().groupName;
         document.querySelector("#groupName").innerHTML = groupName;
     })
+}
+
+function getCreatorName(creatorID, c) {
+    var name = "";
+    db.collection("users").doc(creatorID)
+        .get()
+        .then(doc => {
+            name = doc.data().name;
+            console.log(name);
+            document.querySelector(`#eventi${c}`).insertAdjacentHTML(`beforeend`, `<br>Created by: ${name}`);
+        });
 }
