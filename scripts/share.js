@@ -31,7 +31,7 @@ function populateEventList() {
                         testEventCard.querySelector(".share").setAttribute("onclick", `shareEvent("event${c}", ${c})`);
                         showGroupOptions(userID, c);
                         eventCardGroup.appendChild(testEventCard);
-                        localStorage.setItem (`event${c}`, doc.id);
+                        localStorage.setItem(`event${c}`, doc.id);
                         c++;
                     })
                 })
@@ -52,7 +52,7 @@ function showGroupOptions(userID, c) {
             let i = 0;
             queryData.forEach(doc => {
                 var groupName = doc.data().groupName;
-                document.querySelector(`#e${c}`).insertAdjacentHTML('beforeend', `<option value="${doc.id}">${groupName}</option>`);
+                document.querySelector(`#e${c}`).insertAdjacentHTML("beforeend", `<option value="${doc.id}">${groupName}</option>`);
                 i++;
             })
         })
@@ -63,8 +63,18 @@ function shareEvent(eventc, c) {
     var groupID = document.querySelector(`#e${c}`).value;
     console.log(groupID);
     db.collection("Events").doc(event).set({
-        groupID: firebase.firestore.FieldValue.arrayUnion(groupID)
-    }, {
-        merge: true
-    })
+            groupID: firebase.firestore.FieldValue.arrayUnion(groupID)
+        }, {
+            merge: true
+        })
+        .then(() => {
+            document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",
+                `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Event Shared Successfully!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+            setTimeout(() => {
+                document.querySelector(`.alert`).remove();
+            }, 2500);
+        })
 }

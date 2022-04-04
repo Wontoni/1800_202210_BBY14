@@ -125,21 +125,31 @@ function populateGroups() {
 populateGroups();
 
 function addName(memberRef, c, i) {
+    console.log(c);
     memberRef.get().then(userDoc => {
         var membername = userDoc.data().name;
         if (i === 0) {
-            document.querySelector(`#g${c}members`).insertAdjacentHTML('beforeend', `<li><b>${membername}</b></li>`);
+            document.querySelector(`#g${c}members`).insertAdjacentHTML('afterbegin', `<li><b>${membername}</b></li>`);
+            console.log(membername);
         } else {
             document.querySelector(`#g${c}members`).insertAdjacentHTML('beforeend', `<li>${membername}</b></li>`);
-        }   
+            console.log(membername);
+        }
     })
 }
 
 function copyCode(c) {
     navigator.clipboard.writeText(document.querySelector(`#copyCode${c}`).value);
-    console.log("code saved")
+    document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",
+        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Code Saved!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`);
+    setTimeout(() => {
+        document.querySelector(`.alert`).remove();
+    }, 2500);
 }
 
-function setGroupEvents(id){
-    localStorage.setItem ('groupID', id);
+function setGroupEvents(id) {
+    localStorage.setItem('groupID', id);
 }

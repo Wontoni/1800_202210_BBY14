@@ -115,7 +115,19 @@ function loadEvents(groupID, userID, c) {
         .then(eventList => {
             eventList.forEach(event => {
                 try {
-                    if (event.data().userID == userID && c == 0 || (event.data().userID != userID && event.data().groupID.includes(groupID))) {
+                    if (event.data().userID == userID && c == 0) {
+                        let eventDate = event.data().date;
+                        var element = document.querySelector(`[day="${eventDate}"]`);
+                        var num = element.getElementsByTagName('*').length;
+                        if (num < 15) {
+                            let node = document.querySelector(`[day="${eventDate}"]`);
+                            let newDiv = document.createElement("div");
+                            newDiv.classList.add(`event`);
+                            newDiv.innerHTML = event.data().eventName;
+                            newDiv.style.backgroundColor = "#70a0bb";
+                            node.appendChild(newDiv)
+                        }
+                    } else if (event.data().userID != userID && event.data().groupID.includes(groupID)) {
                         var colors = ["#5EF38C", "#FC7753", "#DBD56E", "#82A3A1", "#FDCA40", "#60935D", "#7B5E7B", "#5998C5", "#E03616", "#63B995"];
                         let eventDate = event.data().date;
                         var element = document.querySelector(`[day="${eventDate}"]`);

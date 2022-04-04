@@ -175,7 +175,15 @@ h1 {
     height: auto;
 }
 
+.alerts {
+    position: fixed;
+    top: 79.19px;
+    width: 100vw;
+}
 
+.alert {
+    margin: 0px;
+}
 
 /* Styling colours */
 .bg-info {
