@@ -22,7 +22,7 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow-y:visible;
+    overflow-y: auto;
 }
 
 .login-grid {
@@ -109,11 +109,11 @@ h1 {
     overflow-x: hidden;
 }
 
-.index-container img {
+#content img {
     height: 75%;
     width: 100%;
+    object-fit: cover;
 }
-
 
 /* Style the tab */
 .tab {
@@ -153,6 +153,10 @@ h1 {
 }
 
 .tabsNav{
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     list-style-type: none;
     overflow: hidden;
     text-align: center;

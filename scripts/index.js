@@ -1,4 +1,5 @@
 function openTab(evt, tabName) {
+  $('#content img').css('height', '30%');
   // Declare all variables
   var i, tabcontent, tablinks;
 
