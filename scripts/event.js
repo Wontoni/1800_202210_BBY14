@@ -3,7 +3,7 @@ function writeEvent() {
     let Date = document.getElementById("date").value;
     let StartTime = document.getElementById("startTime").value;
     let Location = document.getElementById("location").value;
-    let Duration = parseFloat(document.getElementById("duration").value);
+    let Duration = document.getElementById("duration").value;
     console.log(EventName, Date, StartTime, Location, Duration);
 
 
@@ -31,7 +31,7 @@ function writeEvent() {
                             document.querySelector("#date").value = "";
                             document.querySelector("#startTime").value = "";
                             document.querySelector("#location").value = "";
-                            document.querySelector("#duration").value = "";                            
+                            document.querySelector("#duration").value = "";
                         })
 
                 })
@@ -42,6 +42,52 @@ function writeEvent() {
 
 }
 
+function editEvent(c) {
+    if (document.querySelector(`#eventInfoField${c}`).disabled == true) {
+        document.querySelector(`#eventInfoField${c}`).disabled = false;
+    } else {
+        document.querySelector(`#eventInfoField${c}`).disabled = true;
+    }
+}
+
+function saveEvent(c) {
+    let eventID = localStorage.getItem(`eventID${c}`);
+    let EventName = document.getElementById(`eventName${c}`).value;
+    let Date = document.getElementById(`date${c}`).value;
+    let StartTime = document.getElementById(`startTime${c}`).value;
+    let Location = document.getElementById(`location${c}`).value;
+    let Duration = document.getElementById(`duration${c}`).value;
+    console.log(EventName, Date, StartTime, Location, Duration);
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            currentevent = db.collection("Events").doc(eventID);
+            currentevent.update({
+                    eventName: EventName,
+                    startTime: StartTime,
+                    date: Date,
+                    location: Location,
+                    duration: Duration,
+                    sentNotification: false
+                })
+                .then(() => {
+                    document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",
+                        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Event Edit Saved!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`);
+                    setTimeout(() => {
+                        document.querySelector(`.alert`).remove();
+                    }, 2500);
+                    document.querySelector('#eventCardGroup').innerHTML = "";
+                    populateEventList();
+                })
+        } else {
+            console.log("No user is signed in");
+        }
+    });
+}
+
 function displayEachEvent() {
     let newDiv = document.createElement("div");
     newDiv.classList.add("event");
@@ -49,4 +95,3 @@ function displayEachEvent() {
 
     document.querySelector(`[day="${document.querySelector("#date").value}"]`).appendChild(newDiv);
 }
-

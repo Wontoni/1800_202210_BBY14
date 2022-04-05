@@ -11,6 +11,8 @@ function populateEventList() {
                 .then(snap => {
                     queryData = snap.docs;
                     queryData.forEach(doc => {
+                        var eventID = doc.id;
+                        localStorage.setItem(`eventID${c}`, eventID);
                         var eventName = doc.data().eventName;
                         var date = doc.data().date;
                         var duration = doc.data().duration;
@@ -22,12 +24,25 @@ function populateEventList() {
                         testEventCard.querySelector(".accordion-button").setAttribute("aria-controls", `collapse${c}`);
                         testEventCard.querySelector(".accordion-collapse").id = `collapse${c}`;
                         testEventCard.querySelector(".eventTitle").innerHTML = `${date} - ${eventName}`;
-                        testEventCard.querySelector(".eventInfo").innerHTML =
-                            `Event Name: ${eventName} 
-                            <br>Date: ${date} <br>Start Time: ${startTime} 
-                            <br>Duration: ${duration} hours 
-                            <br>Location: ${location}`;
+                        // testEventCard.querySelector(".eventInfo").insertHTML =
+                        // `Event Name: ${eventName} 
+                        // <br>Date: ${date} <br>Start Time: ${startTime} 
+                        // <br>Duration: ${duration} hours 
+                        // <br>Location: ${location}`;
+                        testEventCard.querySelector(".eventInfoField").id = `eventInfoField${c}`;
+                        testEventCard.querySelector(".eventName").id = `eventName${c}`;
+                        testEventCard.querySelector(".eventName").value = eventName;
+                        testEventCard.querySelector(".date").id = `date${c}`;
+                        testEventCard.querySelector(".date").value = date;
+                        testEventCard.querySelector(".startTime").id = `startTime${c}`;
+                        testEventCard.querySelector(".startTime").value = startTime;
+                        testEventCard.querySelector(".location").id = `location${c}`;
+                        testEventCard.querySelector(".location").value = location;
+                        testEventCard.querySelector(".duration").id = `duration${c}`;
+                        testEventCard.querySelector(".duration").value = duration;
                         testEventCard.querySelector(".grouplist").id = `e${c}`;
+                        testEventCard.querySelector(".edit").setAttribute("onclick", `editEvent(${c})`);
+                        testEventCard.querySelector(".save").setAttribute("onclick", `saveEvent(${c})`);
                         testEventCard.querySelector(".share").setAttribute("onclick", `shareEvent("event${c}", ${c})`);
                         showGroupOptions(userID, c);
                         eventCardGroup.appendChild(testEventCard);
