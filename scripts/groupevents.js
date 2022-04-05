@@ -13,6 +13,7 @@ function populateEventList() {
                 .then(snap => {
                     queryData = snap.docs;
                     queryData.forEach(doc => {
+                        var eventID = doc.id;
                         var eventName = doc.data().eventName;
                         var date = doc.data().date;
                         var duration = doc.data().duration;
@@ -51,6 +52,7 @@ function populateEventList() {
                                 </div>`);
                         }
                         eventCardGroup.appendChild(testEventCard);
+                        localStorage.setItem(`event${c}`, eventID);
                         c++;
                     })
                 })
