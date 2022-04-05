@@ -144,7 +144,7 @@ function loadEvents(groupID, userID, c) {
                             let node = document.querySelector(`[day="${eventDate}"]`);
                             let newDiv = document.createElement("div");
                             newDiv.classList.add(`wdevent`);
-                            nnewDiv.innerHTML = `${eventName}
+                            newDiv.innerHTML = `${eventName}
                                 <br>${eventTime}
                                 <br>${location}`;
                             newDiv.style.backgroundColor = colors[c];
