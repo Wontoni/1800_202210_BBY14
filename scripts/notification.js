@@ -270,6 +270,7 @@ function newNotifications() {
 //Loops and checks for notifications every minute
 function surprise() {
     (function loop() {
+        console.log("Notification looped")
         newNotifications();
         var now = new Date(); // allow for time passing
         var delay = 60000 - (now % 60000); // exact ms to next minute interval
