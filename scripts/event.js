@@ -26,6 +26,7 @@ function writeEvent() {
                         })
                         .then(() => {
                             document.querySelectorAll('.e').forEach(e => e.innerHTML = "");
+                            document.querySelectorAll('.de').forEach(e => e.innerHTML = "");
                             displayEachMonthEvents();
                             document.querySelector("#eventName").value = "";
                             document.querySelector("#date").value = "";

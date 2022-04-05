@@ -33,7 +33,7 @@
 
     <!-- Body -->
     <div id="content">
-        <h1 class="display-5 fw-bold text-center">My Events</h1>
+        <h4 class="fw-bold text-center">My Events</h4>
         <template id="eventCardTemplate">
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -48,23 +48,23 @@
                             <fieldset class="mb-3 eventInfoField" disabled>
                                 <div class="form-group">
                                     <label for="eventname">Event Name</label>
-                                    <input type="text" class="form-control eventName" >
+                                    <input type="text" class="form-control form-control-sm eventName" >
                                 </div>
                                 <div class="form-group">
                                     <label for="date">Date</label>
-                                    <input type="date" class="form-control date">
+                                    <input type="date" class="form-control form-control-sm date">
                                 </div>
                                 <div class="form-group">
                                     <label for="time">Start Time</label>
-                                    <input type="time" class="form-control startTime">
+                                    <input type="time" class="form-control form-control-sm startTime">
                                 </div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
-                                    <input type="text" class="form-control location">
+                                    <input type="text" class="form-control form-control-sm location">
                                 </div>
                                 <div class="form-group">
                                     <label for="duration">Duration: </label><br>
-                                    <select name="duration" class="form-control duration">
+                                    <select name="duration" class="form-control form-control-sm duration">
                                         <option value="0.25">00:15 hrs</option>
                                         <option value="0.50">00:30 hrs</option>
                                         <option value="0.75">00:45 hrs</option>
@@ -89,10 +89,10 @@
                                     </select>
                                 </div>
                             </fieldset>
-                            <div class="d-flex justify-content-end mb-3">
-                                <button type="button" class="btn btn-secondary edit">Edit</button>
+                            <div class="d-flex justify-content-end pt-0 mt-0 mb-3">
+                                <button type="button" class="btn btn-secondary btn-sm edit">Edit</button>
                                 <span style="width: 10px"></span>
-                                <button type="button" class="btn btn-info save">Save</button>
+                                <button type="button" class="btn btn-info btn-sm save">Save</button>
                             </div>
                         </div>
                         <div class="input-group mb-3">

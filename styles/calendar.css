@@ -127,6 +127,14 @@ body {
     font-size: 18px;
     margin-left: 5%;
     height: 22px;
+    font-weight: bold;
+}
+
+#day span {
+    font-size: 18px;
+    margin-left: 5%;
+    height: 22px;
+    font-weight: bold;
 }
 
 .othermonth {
@@ -148,6 +156,15 @@ body {
     border-radius: 5px;
     font-size: 14px;
     height: 20px;
+    border: 1px solid black;
+}
+
+.wdevent {
+    overflow: hidden;
+    background-color: #70a0bb;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 50px;
     border: 1px solid black;
 }
 
