@@ -12,7 +12,7 @@ function writeEvent() {
             var currentUser = db.collection("users").doc(user.uid)
             var userID = user.uid;
 
-            var eventID = userID + "_" + EventName + "_" + StartTime + "_" + Date;
+            var eventID = userID + "_" + EventName + "_" + StartTime;
             currentUser.get()
                 .then(userDoc => {
                     db.collection("Events").doc(eventID).set({

@@ -127,7 +127,7 @@ function newNotifications() {
                             // console.log("Valid Sent:" + !doc.data().sentNotification);
                             // Create notifications
                             if (viableDay && viableMonth && viableHour && !doc.data().sentNotification) {
-                                var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime + "_" + doc.data().date;
+                                var eventDoc = userID + "_" + doc.data().eventName + "_" + doc.data().startTime;
                                 changeNotifIcon(1);
                                 db.collection("Events").doc(eventDoc).update({
                                     sentNotification: true,
