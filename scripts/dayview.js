@@ -61,11 +61,16 @@ function displayEachMonthEvents() {
                 .get()
                 .then(snap => {
                     queryData = snap.docs;
-                    queryData.forEach(doc => {
-                        // console.log(doc.id);
-                        loadEvents(doc.id, userID, c);
+                    if (queryData.length == 0) {
+                        loadEvents("", userID, c);
                         c++;
-                    })
+                    } else {
+                        queryData.forEach(doc => {
+                            // console.log(doc.id);
+                            loadEvents(doc.id, userID, c);
+                            c++;
+                        })
+                    }
                 })
         }
     });

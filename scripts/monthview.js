@@ -90,23 +90,35 @@ function displayEachMonthEvents() {
             db.collection("Groups").where("users", "array-contains", userID)
                 .get()
                 .then(snap => {
+                    console.log("eugydh")
                     queryData = snap.docs;
-                    queryData.forEach(doc => {
-                        // console.log(doc.id);
-                        loadEvents(doc.id, userID, c);
+                    if (queryData.length == 0) {
+                        loadEvents("", userID, c);
                         c++;
-                    })
+                    } else {
+                        queryData.forEach(doc => {
+                            // console.log(doc.id);
+                            loadEvents(doc.id, userID, c);
+                            c++;
+                        })
+                    }
+
                 })
         }
     });
 }
 
 function loadEvents(groupID, userID, c) {
+    if (groupID == null) {
+        var groupID = "";
+    }
+    console.log("function called");
     db.collection("Events").orderBy("startTime").get()
         .then(eventList => {
             eventList.forEach(event => {
                 try {
                     if (event.data().userID == userID && c == 0) {
+                        console.log("display user events");
                         let eventDate = event.data().date;
                         var element = document.querySelector(`[day="${eventDate}"]`);
                         var num = element.getElementsByTagName('*').length;
@@ -119,6 +131,7 @@ function loadEvents(groupID, userID, c) {
                             node.appendChild(newDiv)
                         }
                     } else if (event.data().userID != userID && event.data().groupID.includes(groupID)) {
+                        console.log("display group events");
                         var colors = ["#5EF38C", "#FC7753", "#DBD56E", "#82A3A1", "#FDCA40", "#60935D", "#7B5E7B", "#5998C5", "#E03616", "#63B995"];
                         let eventDate = event.data().date;
                         var element = document.querySelector(`[day="${eventDate}"]`);
