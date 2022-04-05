@@ -52,7 +52,7 @@ function editEvent(c) {
 }
 
 function saveEvent(c) {
-    let eventID = localStorage.getItem(`eventID${c}`);
+    let eventID = localStorage.getItem(`event${c}`);
     let EventName = document.getElementById(`eventName${c}`).value;
     let Date = document.getElementById(`date${c}`).value;
     let StartTime = document.getElementById(`startTime${c}`).value;

@@ -119,13 +119,16 @@ function loadEvents(groupID, userID, c) {
                         let eventDate = event.data().date;
                         let eventName = event.data().eventName;
                         let eventTime = event.data().startTime;
+                        let location = event.data().location;
                         var element = document.querySelector(`[day="${eventDate}"]`);
                         var num = element.getElementsByTagName('*').length;
                         if (num < 15) {
                             let node = document.querySelector(`[day="${eventDate}"]`);
                             let newDiv = document.createElement("div");
                             newDiv.classList.add(`wdevent`);
-                            newDiv.innerHTML = eventName + "<br>" + eventTime;
+                            newDiv.innerHTML = `${eventName}
+                                <br>${eventTime}
+                                <br>${location}`;
                             newDiv.style.backgroundColor = "#70a0bb";
                             node.appendChild(newDiv)
                         }
@@ -134,13 +137,16 @@ function loadEvents(groupID, userID, c) {
                         let eventDate = event.data().date;
                         let eventName = event.data().eventName;
                         let eventTime = event.data().startTime;
+                        let location = event.data().location;
                         var element = document.querySelector(`[day="${eventDate}"]`);
                         var num = element.getElementsByTagName('*').length;
                         if (num < 15) {
                             let node = document.querySelector(`[day="${eventDate}"]`);
                             let newDiv = document.createElement("div");
                             newDiv.classList.add(`wdevent`);
-                            newDiv.innerHTML = eventName + "<br>" + eventTime;
+                            nnewDiv.innerHTML = `${eventName}
+                                <br>${eventTime}
+                                <br>${location}`;
                             newDiv.style.backgroundColor = colors[c];
                             node.appendChild(newDiv)
                         }
