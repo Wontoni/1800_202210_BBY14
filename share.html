@@ -37,7 +37,7 @@
         <template id="eventCardTemplate">
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button fs-5 fw-bold eventTitle" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed fs-5 fw-bold eventTitle" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Event Name - Date
                     </button>
@@ -97,6 +97,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <select class="form-control grouplist">
+                                <option value="" selected disabled hidden>Select a group</option>
                             </select>
                             <button class="btn btn-outline-secondary share" type="button">Share</button>
                         </div>

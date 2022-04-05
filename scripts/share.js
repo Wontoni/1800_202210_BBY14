@@ -12,7 +12,6 @@ function populateEventList() {
                     queryData = snap.docs;
                     queryData.forEach(doc => {
                         var eventID = doc.id;
-                        localStorage.setItem(`eventID${c}`, eventID);
                         var eventName = doc.data().eventName;
                         var date = doc.data().date;
                         var duration = doc.data().duration;
@@ -46,7 +45,7 @@ function populateEventList() {
                         testEventCard.querySelector(".share").setAttribute("onclick", `shareEvent("event${c}", ${c})`);
                         showGroupOptions(userID, c);
                         eventCardGroup.appendChild(testEventCard);
-                        localStorage.setItem(`event${c}`, doc.id);
+                        localStorage.setItem(`event${c}`, eventID);
                         c++;
                     })
                 })
@@ -76,7 +75,6 @@ function showGroupOptions(userID, c) {
 function shareEvent(eventc, c) {
     var event = localStorage.getItem(eventc);
     var groupID = document.querySelector(`#e${c}`).value;
-    console.log(groupID);
     db.collection("Events").doc(event).set({
             groupID: firebase.firestore.FieldValue.arrayUnion(groupID)
         }, {

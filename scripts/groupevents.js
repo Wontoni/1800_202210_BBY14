@@ -25,13 +25,31 @@ function populateEventList() {
                         testEventCard.querySelector(".accordion-button").setAttribute("aria-controls", `collapse${c}`);
                         testEventCard.querySelector(".accordion-collapse").id = `collapse${c}`;
                         testEventCard.querySelector(".eventTitle").innerHTML = `${date} - ${eventName}`;
-                        testEventCard.querySelector(".eventInfo").innerHTML =
-                            `Event Name: ${eventName} 
-                            <br>Date: ${date} <br>Start Time: ${startTime} 
-                            <br>Duration: ${duration} hours 
-                            <br>Location: ${location}`;
-                        testEventCard.querySelector(".eventInfo").id = `eventi${c}`;
+                        // testEventCard.querySelector(".eventInfo").insertHTML =
+                        // `Event Name: ${eventName} 
+                        // <br>Date: ${date} <br>Start Time: ${startTime} 
+                        // <br>Duration: ${duration} hours 
+                        // <br>Location: ${location}`;
+                        testEventCard.querySelector(".eventInfoField").id = `eventInfoField${c}`;
+                        testEventCard.querySelector(".eventName").id = `eventName${c}`;
+                        testEventCard.querySelector(".eventName").value = eventName;
+                        testEventCard.querySelector(".date").id = `date${c}`;
+                        testEventCard.querySelector(".date").value = date;
+                        testEventCard.querySelector(".startTime").id = `startTime${c}`;
+                        testEventCard.querySelector(".startTime").value = startTime;
+                        testEventCard.querySelector(".location").id = `location${c}`;
+                        testEventCard.querySelector(".location").value = location;
+                        testEventCard.querySelector(".duration").id = `duration${c}`;
+                        testEventCard.querySelector(".duration").value = duration;
                         getCreatorName(creatorID, c);
+                        if (creatorID == user.uid) {
+                            testEventCard.querySelector(".eventInfo").insertAdjacentHTML(`beforeend`, 
+                                `<div class="d-flex justify-content-end pt-0 mt-0 mb-3">
+                                    <button type="button" class="btn btn-secondary btn-sm edit" onclick="editEvent(${c})">Edit</button>
+                                    <span style="width: 10px"></span>
+                                    <button type="button" class="btn btn-info btn-sm save" onclick="saveEvent(${c})">Save</button>
+                                </div>`);
+                        }
                         eventCardGroup.appendChild(testEventCard);
                         c++;
                     })
@@ -59,6 +77,6 @@ function getCreatorName(creatorID, c) {
         .then(doc => {
             name = doc.data().name;
             console.log(name);
-            document.querySelector(`#eventi${c}`).insertAdjacentHTML(`beforeend`, `<br>Created by: ${name}`);
+            document.querySelector(`#eventInfoField${c}`).insertAdjacentHTML(`beforeend`, `Created by:<br>${name}`);
         });
 }

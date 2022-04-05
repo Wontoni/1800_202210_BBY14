@@ -37,16 +37,59 @@
         <template id="eventCardTemplate">
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button fs-5 fw-bold eventTitle" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed fs-5 fw-bold eventTitle" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Event Name - Date
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <p class="eventInfo">
-                            placeholder
-                        </p>
+                        <div class="eventInfo">
+                            <fieldset class="mb-3 eventInfoField" disabled>
+                                <div class="form-group">
+                                    <label for="eventname">Event Name</label>
+                                    <input type="text" class="form-control form-control-sm eventName" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date</label>
+                                    <input type="date" class="form-control form-control-sm date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="time">Start Time</label>
+                                    <input type="time" class="form-control form-control-sm startTime">
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" class="form-control form-control-sm location">
+                                </div>
+                                <div class="form-group">
+                                    <label for="duration">Duration: </label><br>
+                                    <select name="duration" class="form-control form-control-sm duration">
+                                        <option value="0.25">00:15 hrs</option>
+                                        <option value="0.50">00:30 hrs</option>
+                                        <option value="0.75">00:45 hrs</option>
+                                        <option value="1.00">01:00 hrs</option>
+                                        <option value="1.25">01:15 hrs</option>
+                                        <option value="1.50">01:30 hrs</option>
+                                        <option value="1.75">01:45 hrs</option>
+                                        <option value="2.00">02:00 hrs</option>
+                                        <option value="2.25">02:15 hrs</option>
+                                        <option value="2.50">02:30 hrs</option>
+                                        <option value="2.75">02:45 hrs</option>
+                                        <option value="3.00">03:00 hrs</option>
+                                        <option value="3.25">03:15 hrs</option>
+                                        <option value="3.50">03:30 hrs</option>
+                                        <option value="3.75">03:45 hrs</option>
+                                        <option value="4.00">04:00 hrs</option>
+                                        <option value="4.25">04:15 hrs</option>
+                                        <option value="4.50">04:30 hrs</option>
+                                        <option value="4.75">04:45 hrs</option>
+                                        <option value="5.00">05:00 hrs</option>
+                                        <option value="24.00">All Day</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,6 +97,7 @@
         <div id="eventCardGroup">
         </div>
     </div>
+    <div class="alerts"></div>
 
 
     <!-- Footer -->
@@ -66,6 +110,7 @@
     <script src="./scripts/firebaseAPI_BBY14.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/groupevents.js"></script>
+    <script src="./scripts/event.js"></script>
 
 
 </body>
