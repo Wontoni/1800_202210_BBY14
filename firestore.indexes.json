@@ -1,0 +1,69 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "Events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "groupID",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "startTime",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "groupID",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "startTime",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "startTime",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "startTime",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
