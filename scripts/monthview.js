@@ -39,7 +39,7 @@ function loadCalendar() {
             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="othermonth mvdays"><span>${prevmonthday}</span><div></div></div>`);
             prevmonthday++;
         } else if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
-            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div id="currentday" class="bg-info mvdays"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="e"></div></div>`);
+            document.querySelector("#days").insertAdjacentHTML('beforeend', `<div id="currentday" class="mvdays"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="e"></div></div>`);
             day++;
         } else if (day <= monthdays) {
             document.querySelector("#days").insertAdjacentHTML('beforeend', `<div class="mvdays"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="e"></div></div>`);

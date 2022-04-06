@@ -39,7 +39,7 @@ function loadCalendar() {
 
         
         if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
-            document.querySelector("#day").insertAdjacentHTML('beforeend', `<div id="currentday" class="bg-info"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="de"></div>`);
+            document.querySelector("#day").insertAdjacentHTML('beforeend', `<div id="currentday"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="de"></div>`);
             day++;
         } else if (day <= monthdays) {
             if (day <= 0) {

@@ -89,6 +89,30 @@ function saveEvent(c) {
     });
 }
 
+function deleteEvent(c) {
+    let eventID = localStorage.getItem(`event${c}`);
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            db.collection("Events").doc(eventID).delete()
+                .then(() => {
+                    document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",
+                        `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Event Deleted!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`);
+                    setTimeout(() => {
+                        document.querySelector(`.alert`).remove();
+                    }, 2500);
+                    document.querySelector('#eventCardGroup').innerHTML = "";
+                    populateEventList();
+                })
+        } else {
+            console.log("No user is signed in");
+        }
+    });
+}
+
 function displayEachEvent() {
     let newDiv = document.createElement("div");
     newDiv.classList.add("event");

@@ -118,6 +118,10 @@ body {
     min-width: 0;
 }
 
+#currentday {
+    background-color: skyblue;
+}
+
 .e {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;

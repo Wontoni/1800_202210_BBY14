@@ -44,12 +44,16 @@ function populateEventList() {
                         testEventCard.querySelector(".duration").value = duration;
                         getCreatorName(creatorID, c);
                         if (creatorID == user.uid) {
-                            testEventCard.querySelector(".eventInfo").insertAdjacentHTML(`beforeend`, 
+                            testEventCard.querySelector(".eventInfo").insertAdjacentHTML(`beforeend`,
                                 `<div class="d-flex justify-content-end pt-0 mt-0 mb-3">
+                                    <button type="button" class="btn btn-danger btn-sm delete" data-bs-toggle="modal" data-bs-target="#deleteModal${c}">Delete</button>
+                                    <span style="width: 10px"></span>
                                     <button type="button" class="btn btn-secondary btn-sm edit" onclick="editEvent(${c})">Edit</button>
                                     <span style="width: 10px"></span>
                                     <button type="button" class="btn btn-info btn-sm save" onclick="saveEvent(${c})">Save</button>
                                 </div>`);
+                            testEventCard.querySelector(".modal").id = `deleteModal${c}`;
+                            testEventCard.querySelector(".deleteconf").setAttribute("onclick", `deleteEvent(${c})`);
                         }
                         eventCardGroup.appendChild(testEventCard);
                         localStorage.setItem(`event${c}`, eventID);

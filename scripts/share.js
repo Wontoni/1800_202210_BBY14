@@ -40,10 +40,13 @@ function populateEventList() {
                         testEventCard.querySelector(".duration").id = `duration${c}`;
                         testEventCard.querySelector(".duration").value = duration;
                         testEventCard.querySelector(".grouplist").id = `e${c}`;
+                        testEventCard.querySelector(".delete").setAttribute("data-bs-target", `#deleteModal${c}`);
                         testEventCard.querySelector(".edit").setAttribute("onclick", `editEvent(${c})`);
                         testEventCard.querySelector(".save").setAttribute("onclick", `saveEvent(${c})`);
                         testEventCard.querySelector(".share").setAttribute("onclick", `shareEvent("event${c}", ${c})`);
                         showGroupOptions(userID, c);
+                        testEventCard.querySelector(".modal").id =`deleteModal${c}`;
+                        testEventCard.querySelector(".deleteconf").setAttribute("onclick", `deleteEvent(${c})`);
                         eventCardGroup.appendChild(testEventCard);
                         localStorage.setItem(`event${c}`, eventID);
                         c++;
