@@ -24,19 +24,55 @@ Content of the project folder:
  Top level of project folder: 
 ├── .gitignore               # Git ignore file
 ├── index.html               # landing HTML file, this is what users see when you come to url\
-└── README.md
+├── login.html               #
+├── calendar.html            #   
+├── settings.html            #
+├── groups.html              #
+├── groupevents.html         #
+├── myevents.html            #
+├── 404.html                 #
+└── README.md                #
 
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo
+├── html                     #
+    /indexnav.html           #
+    /nav.html                #
+    /footer.html             #
+    /dayview.html            #
+    /weekview.html           #
+    /monthview.html          #
+    /todo.html               #
 ├── images                   # Folder for images
-    /blah.jpg                # 
+    /collabendar.png         # Banner logo image
+    /COMP1800Logo.png        # Project logo image
+    /indexphoto.jpg          #
 ├── scripts                  # Folder for scripts
-    /blah.js                 # 
+    /authentication.js       #
+    /calendar.js             #
+    /dayview.js              #
+    /weekview.js             #
+    /monthview.js            #
+    /event.js                #
+    /group.js                #
+    /groupevents.js          #
+    /index.js                #
+    /notification.js         #
+    /script.js               #
+    /settings.js             #
+    /share.js                #
+    /skeleton.js             #
+    /todo.js                 #
 ├── styles                   # Folder for styles
-    /blah.css                # 
-
+    /calendar.css            # 
+    /style.css               #
+    /todo.css                #
 Firebase hosting files: 
-├── .firebaserc...
+├── .firebaserc              #
+├── firebase.json            #
+├── firestore.indexes.json   #
+├── firestore.rules          #
+└── storage.rules            #
 
 
 ```
