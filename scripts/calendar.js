@@ -1,16 +1,16 @@
 //Month View
 function loadMonthView() {
-    console.log($('#calendar').load('./monthview.html'));
+    console.log($('#calendar').load('./html/monthview.html'));
 }
 
 //Week View
 function loadWeekView() {
-    console.log($('#calendar').load('./weekview.html'));
+    console.log($('#calendar').load('./html/weekview.html'));
 }
 
 //Day View
 function loadDayView() {
-    console.log($('#calendar').load('./dayview.html'));
+    console.log($('#calendar').load('./html/dayview.html'));
 }
 
 //Load Default View
