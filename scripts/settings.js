@@ -33,7 +33,7 @@ function saveSettings() {
 
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            currentUser = db.collection("users").doc(user.uid); 
+            currentUser = db.collection("users").doc(user.uid);
             currentUser.update({
                     name: userName,
                     default: userDefault

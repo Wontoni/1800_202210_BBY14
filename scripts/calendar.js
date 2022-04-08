@@ -16,7 +16,7 @@ function loadDayView() {
 //Load Default View
 var currentUser
 
-function loadDefaultView(){
+function loadDefaultView() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             currentUser = db.collection("users").doc(user.uid)

@@ -15,7 +15,7 @@ function loadCalendar() {
     document.querySelector("#weekday").innerHTML = date.toLocaleString('default', {
         weekday: 'long'
     });
-    
+
 
     let monthdays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     let today = date.getDate();
@@ -37,7 +37,7 @@ function loadCalendar() {
             currDay = `0${currDay}`;
         }
 
-        
+
         if (day === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
             document.querySelector("#day").insertAdjacentHTML('beforeend', `<div id="currentday"><span>${day}</span><div day=${currYear}-${currMonth}-${currDay} class="de"></div>`);
             day++;
@@ -76,6 +76,7 @@ function displayEachMonthEvents() {
     });
 }
 
+// Populate calander with user created events.
 function loadEvents(groupID, userID, c) {
     db.collection("Events").orderBy("startTime").get()
         .then(eventList => {

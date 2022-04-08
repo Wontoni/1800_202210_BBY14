@@ -3,7 +3,7 @@ var todoCanvas = document.getElementById("todoOffCanvas");
 var todoOffcanvas = new bootstrap.Offcanvas(todoCanvas);
 
 function toggleToDo() {
-    todoOffcanvas.toggle();
+  todoOffcanvas.toggle();
 }
 
 
@@ -75,10 +75,10 @@ function newElement() {
           .then(userDoc => {
             // Start a new collection and add all data in it.
             db.collection("users").doc(user.uid).collection("ToDo-List").doc(Task).set({
-              userID: userID, //for logged in user
-              name: Task,
-              completion: false,
-            })
+                userID: userID, //for logged in user
+                name: Task,
+                completion: false,
+              })
               .then(function () {
                 console.log("Successfully added task");
               });
@@ -175,9 +175,3 @@ function insertTasks(user) {
     })
 
 }
-
-
-
-
-
-

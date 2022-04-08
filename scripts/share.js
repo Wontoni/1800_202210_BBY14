@@ -1,3 +1,4 @@
+// Function to populate the events to myevents page.
 function populateEventList() {
     let eventCardTemplate = document.getElementById("eventCardTemplate");
     let eventCardGroup = document.getElementById("eventCardGroup");
@@ -23,11 +24,6 @@ function populateEventList() {
                         testEventCard.querySelector(".accordion-button").setAttribute("aria-controls", `collapse${c}`);
                         testEventCard.querySelector(".accordion-collapse").id = `collapse${c}`;
                         testEventCard.querySelector(".eventTitle").innerHTML = `${date} - ${eventName}`;
-                        // testEventCard.querySelector(".eventInfo").insertHTML =
-                        // `Event Name: ${eventName} 
-                        // <br>Date: ${date} <br>Start Time: ${startTime} 
-                        // <br>Duration: ${duration} hours 
-                        // <br>Location: ${location}`;
                         testEventCard.querySelector(".eventInfoField").id = `eventInfoField${c}`;
                         testEventCard.querySelector(".eventName").id = `eventName${c}`;
                         testEventCard.querySelector(".eventName").value = eventName;
@@ -45,7 +41,7 @@ function populateEventList() {
                         testEventCard.querySelector(".save").setAttribute("onclick", `saveEvent(${c})`);
                         testEventCard.querySelector(".share").setAttribute("onclick", `shareEvent("event${c}", ${c})`);
                         showGroupOptions(userID, c);
-                        testEventCard.querySelector(".modal").id =`deleteModal${c}`;
+                        testEventCard.querySelector(".modal").id = `deleteModal${c}`;
                         testEventCard.querySelector(".deleteconf").setAttribute("onclick", `deleteEvent(${c})`);
                         eventCardGroup.appendChild(testEventCard);
                         localStorage.setItem(`event${c}`, eventID);
@@ -61,6 +57,7 @@ function populateEventList() {
 }
 populateEventList();
 
+// Show the group share option.
 function showGroupOptions(userID, c) {
     db.collection("Groups").where("users", "array-contains", userID)
         .get()
@@ -74,6 +71,7 @@ function showGroupOptions(userID, c) {
             })
         })
 }
+
 
 function shareEvent(eventc, c) {
     var event = localStorage.getItem(eventc);

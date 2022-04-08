@@ -1,3 +1,4 @@
+//Create DB and write events into calendar. 
 function writeEvent() {
     let EventName = document.getElementById("eventName").value;
     let Date = document.getElementById("date").value;
@@ -43,6 +44,7 @@ function writeEvent() {
 
 }
 
+//Enables edit button for events.
 function editEvent(c) {
     if (document.querySelector(`#eventInfoField${c}`).disabled == true) {
         document.querySelector(`#eventInfoField${c}`).disabled = false;
@@ -113,10 +115,10 @@ function deleteEvent(c) {
     });
 }
 
+//Used for testing.
 function displayEachEvent() {
     let newDiv = document.createElement("div");
     newDiv.classList.add("event");
     newDiv.innerHTML = document.querySelector("#eventName").value;
-
     document.querySelector(`[day="${document.querySelector("#date").value}"]`).appendChild(newDiv);
 }
