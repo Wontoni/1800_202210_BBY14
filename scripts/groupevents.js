@@ -1,5 +1,7 @@
+//retrieves group id from local storage to show the correct events
 let groupID = localStorage.getItem("groupID");
 
+// Function to populate the events for the group.
 function populateEventList() {
     let eventCardTemplate = document.getElementById("eventCardTemplate");
     let eventCardGroup = document.getElementById("eventCardGroup");
@@ -26,11 +28,6 @@ function populateEventList() {
                         testEventCard.querySelector(".accordion-button").setAttribute("aria-controls", `collapse${c}`);
                         testEventCard.querySelector(".accordion-collapse").id = `collapse${c}`;
                         testEventCard.querySelector(".eventTitle").innerHTML = `${date} - ${eventName}`;
-                        // testEventCard.querySelector(".eventInfo").insertHTML =
-                        // `Event Name: ${eventName} 
-                        // <br>Date: ${date} <br>Start Time: ${startTime} 
-                        // <br>Duration: ${duration} hours 
-                        // <br>Location: ${location}`;
                         testEventCard.querySelector(".eventInfoField").id = `eventInfoField${c}`;
                         testEventCard.querySelector(".eventName").id = `eventName${c}`;
                         testEventCard.querySelector(".eventName").value = eventName;
@@ -43,6 +40,7 @@ function populateEventList() {
                         testEventCard.querySelector(".duration").id = `duration${c}`;
                         testEventCard.querySelector(".duration").value = duration;
                         getCreatorName(creatorID, c);
+                        //if the user is the creator then display edit and delete options
                         if (creatorID == user.uid) {
                             testEventCard.querySelector(".eventInfo").insertAdjacentHTML(`beforeend`,
                                 `<div class="d-flex justify-content-end pt-0 mt-0 mb-3">
@@ -69,6 +67,7 @@ function populateEventList() {
 }
 populateEventList();
 
+//Displays the current group name
 function insertGroupName(groupRef) {
     groupRef.get().then(doc => {
         var groupName = doc.data().groupName;
@@ -76,6 +75,7 @@ function insertGroupName(groupRef) {
     })
 }
 
+//Displays who created the event
 function getCreatorName(creatorID, c) {
     var name = "";
     db.collection("users").doc(creatorID)

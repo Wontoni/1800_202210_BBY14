@@ -37,6 +37,7 @@ function loadDefaultView() {
     });
 }
 
+//load calendar view based on the url
 function loadView() {
     // create a URL object
     let params = new URL(window.location.href);

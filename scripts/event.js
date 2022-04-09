@@ -53,6 +53,7 @@ function editEvent(c) {
     }
 }
 
+//Function to save event after edit.
 function saveEvent(c) {
     let eventID = localStorage.getItem(`event${c}`);
     let EventName = document.getElementById(`eventName${c}`).value;
@@ -74,6 +75,7 @@ function saveEvent(c) {
                     sentNotification: false
                 })
                 .then(() => {
+                    //Alert the user that edit has been saved
                     document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",
                         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Event Edit Saved!</strong>
@@ -82,6 +84,7 @@ function saveEvent(c) {
                     setTimeout(() => {
                         document.querySelector(`.alert`).remove();
                     }, 2500);
+                    //repopulate event list
                     document.querySelector('#eventCardGroup').innerHTML = "";
                     populateEventList();
                 })
@@ -91,6 +94,7 @@ function saveEvent(c) {
     });
 }
 
+//Delete events
 function deleteEvent(c) {
     let eventID = localStorage.getItem(`event${c}`);
 
@@ -98,6 +102,7 @@ function deleteEvent(c) {
         if (user) {
             db.collection("Events").doc(eventID).delete()
                 .then(() => {
+                    //Alert the user that event has been deleted
                     document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",
                         `<div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Event Deleted!</strong>
@@ -106,6 +111,7 @@ function deleteEvent(c) {
                     setTimeout(() => {
                         document.querySelector(`.alert`).remove();
                     }, 2500);
+                    //repopulate event list
                     document.querySelector('#eventCardGroup').innerHTML = "";
                     populateEventList();
                 })

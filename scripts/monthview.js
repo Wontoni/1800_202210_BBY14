@@ -1,5 +1,7 @@
+//sets the date to today
 let date = new Date();
 
+//Displays the month view calendar
 function loadCalendar() {
     document.querySelector("#monthyear").innerHTML = date.toLocaleString('default', {
         month: 'long',
@@ -51,37 +53,9 @@ function loadCalendar() {
     }
 
     displayEachMonthEvents();
-    // displayGroupMonthEvents();
 }
 
-
-// function displayEachMonthEvents() {
-//     firebase.auth().onAuthStateChanged(user => {
-//         if (user) {
-//             let userID = user.uid;
-//             db.collection("Events").where("userID", "==", userID).orderBy("startTime").get()
-//                 .then(eventList => {
-//                     eventList.forEach(event => {
-//                         try {
-//                             let eventDate = event.data().date;
-//                             var element = document.querySelector(`[day="${eventDate}"]`);
-//                             var num = element.getElementsByTagName('*').length;
-//                             if (num < 15) {
-//                                 let node = document.querySelector(`[day="${eventDate}"]`);
-//                                 let newDiv = document.createElement("div");
-//                                 newDiv.classList.add("event");
-//                                 newDiv.innerHTML = event.data().eventName;
-//                                 node.appendChild(newDiv)
-//                             }
-//                         } catch (e) {
-//                             // Do Nothing!
-//                         }
-//                     })
-//                 })
-//         }
-//     });
-// }
-
+//Function to begin displaying events
 function displayEachMonthEvents() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -108,6 +82,7 @@ function displayEachMonthEvents() {
     });
 }
 
+// Populate calander with user created events.
 function loadEvents(groupID, userID, c) {
     if (groupID == null) {
         var groupID = "";
@@ -155,16 +130,19 @@ function loadEvents(groupID, userID, c) {
         })
 }
 
+//goes to the previous month
 function prevmonth() {
     date.setMonth(date.getMonth() - 1);
     loadCalendar();
 }
 
+//goes to the next month
 function nextmonth() {
     date.setMonth(date.getMonth() + 1);
     loadCalendar();
 }
 
+//returns to current month
 function currentmonth() {
     date.setFullYear(new Date().getFullYear())
     date.setMonth(new Date().getMonth())

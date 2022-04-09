@@ -72,7 +72,7 @@ function showGroupOptions(userID, c) {
         })
 }
 
-
+//share event function by adding group to event
 function shareEvent(eventc, c) {
     var event = localStorage.getItem(eventc);
     var groupID = document.querySelector(`#e${c}`).value;

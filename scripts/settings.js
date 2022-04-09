@@ -1,5 +1,6 @@
 var currentUser
 
+//Show the user's settings
 function showSettings() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -27,6 +28,7 @@ function showSettings() {
 }
 showSettings();
 
+//Save the user's settings
 function saveSettings() {
     userName = document.getElementById('nameInput').value;
     userDefault = document.getElementById("defaultView").value;

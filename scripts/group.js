@@ -1,3 +1,4 @@
+//function to create groups
 function createGroup() {
     console.log("in")
     let groupName = document.getElementById("groupName").value;
@@ -19,6 +20,7 @@ function createGroup() {
                             merge: true
                         })
                         .then(() => {
+                            //repopulate group list
                             document.querySelector("#groupCardGroup").innerHTML = "";
                             populateGroups();
                             document.querySelector("#groupName").value = "";
@@ -30,6 +32,7 @@ function createGroup() {
     });
 }
 
+//function to join groups
 function joinGroup() {
     console.log("in")
     let groupCode = document.getElementById("groupCode").value;
@@ -59,6 +62,7 @@ function joinGroup() {
                             merge: true
                         })
                         .then(() => {
+                            //repopulate group list
                             document.querySelector("#groupCardGroup").innerHTML = "";
                             populateGroups();
                             document.querySelector("#groupCode").value = "";
@@ -70,6 +74,7 @@ function joinGroup() {
     });
 }
 
+//generates a random code used to join groups
 function generateCode() {
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let code = "";
@@ -79,6 +84,7 @@ function generateCode() {
     return code;
 }
 
+// Function to populate the groups to the groups page.
 function populateGroups() {
     let groupCardTemplate = document.getElementById("groupCardTemplate");
     let groupCardGroup = document.getElementById("groupCardGroup");
@@ -124,6 +130,7 @@ function populateGroups() {
 }
 populateGroups();
 
+//displays group members
 function addName(memberRef, c, i) {
     console.log(c);
     memberRef.get().then(userDoc => {
@@ -138,6 +145,7 @@ function addName(memberRef, c, i) {
     })
 }
 
+//function to copy code to clipboard
 function copyCode(c) {
     navigator.clipboard.writeText(document.querySelector(`#copyCode${c}`).value);
     document.querySelector(`.alerts`).insertAdjacentHTML("afterbegin",

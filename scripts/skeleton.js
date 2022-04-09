@@ -1,6 +1,7 @@
 //loads the header/navbar and footer
 function loadSkeleton() {
     let page = location.href.split("/").pop();
+    //load different navbar based on page
     if (page === "" || page === "index.html" || page === "login.html") {
         console.log($('#navbar').load('./html/indexnav.html'))
     } else {

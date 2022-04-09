@@ -1,5 +1,7 @@
+//sets the date to today
 let date = new Date();
 
+//Displays the week view calendar
 function loadCalendar() {
     document.querySelector("#monthyear").innerHTML = date.toLocaleString('default', {
         month: 'long',
@@ -60,37 +62,12 @@ function loadCalendar() {
             nextmonthday++;
         }
     }
+    //allows the days to stretch to the height of the div
     $('.wvdays').css('grid-row', '1/-1');
     displayEachMonthEvents();
 }
 
-// function displayEachMonthEvents() {
-//     firebase.auth().onAuthStateChanged(user => {
-//         if (user) {
-//             let userID = user.uid;
-//             db.collection("Events").where("userID", "==", userID).orderBy("startTime").get()
-//                 .then(eventList => {
-//                     eventList.forEach(event => {
-//                         try {
-//                             let eventDate = event.data().date;
-//                             var element = document.querySelector(`[day="${eventDate}"]`);
-//                             var num = element.getElementsByTagName('*').length;
-//                             if (num < 15) {
-//                                 let node = document.querySelector(`[day="${eventDate}"]`);
-//                                 let newDiv = document.createElement("div");
-//                                 newDiv.classList.add("event");
-//                                 newDiv.innerHTML = event.data().eventName;
-//                                 node.appendChild(newDiv)
-//                             }
-//                         } catch (e) {
-//                             // Do Nothing!
-//                         }
-//                     })
-//                 })
-//         }
-//     });
-// }
-
+//Function to begin displaying events
 function displayEachMonthEvents() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -115,6 +92,7 @@ function displayEachMonthEvents() {
     });
 }
 
+// Populate calander with user created events.
 function loadEvents(groupID, userID, c) {
     db.collection("Events").orderBy("startTime").get()
         .then(eventList => {
@@ -166,16 +144,19 @@ function loadEvents(groupID, userID, c) {
         })
 }
 
+//goes to the previous week
 function prevweek() {
     date.setDate(date.getDate() - 7);
     loadCalendar();
 }
 
+//goes to the next week
 function nextweek() {
     date.setDate(date.getDate() + 7);
     loadCalendar();
 }
 
+//returns to the current week
 function currentweek() {
     date.setFullYear(new Date().getFullYear())
     date.setMonth(new Date().getMonth())

@@ -1,5 +1,7 @@
+//sets the date to today
 let date = new Date();
 
+//Displays the day view calendar
 function loadCalendar() {
     document.querySelector("#monthyear").innerHTML = date.toLocaleString('default', {
         month: 'long',
@@ -52,6 +54,7 @@ function loadCalendar() {
     displayEachMonthEvents();
 }
 
+//Function to begin displaying events
 function displayEachMonthEvents() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -128,16 +131,19 @@ function loadEvents(groupID, userID, c) {
         })
 }
 
+//goes to the previous day
 function prevday() {
     date.setDate(date.getDate() - 1);
     loadCalendar();
 }
 
+//goes to the next day
 function nextday() {
     date.setDate(date.getDate() + 1);
     loadCalendar();
 }
 
+//returns to today
 function currentday() {
     date.setFullYear(new Date().getFullYear())
     date.setMonth(new Date().getMonth())
