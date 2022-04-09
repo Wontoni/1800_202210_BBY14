@@ -89,7 +89,7 @@ Firebase hosting files:
 
 
 ## Acknowledgements
-* <a href="https://fonts.google.com/icons")</a>
+* <a href="https://fonts.google.com/icons">Google Icons</a>
 * <a href="https://getbootstrap.com/">Bootstrap</a>
 
 
